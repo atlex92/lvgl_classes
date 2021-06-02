@@ -7,6 +7,7 @@ set(COMPONENT_PRIV_REQUIRES )
 file(GLOB COMPONENT_SRCS
   LIST_DIRECTORIES false
   "*.hpp"
+  "*.h"
   "*.cpp"
   "*.c"
   "*.S"
