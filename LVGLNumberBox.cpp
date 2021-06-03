@@ -18,6 +18,7 @@ LVGLNumberBox::LVGLNumberBox(lv_obj_t* parent, const int minValue, const int max
     auto minusCb = [this](const lv_event_t event) {
         if(LV_EVENT_CLICKED == event) {
             decrement();
+            this->_valueLbl->setText(this->value());
         }
     };
 
@@ -27,14 +28,21 @@ LVGLNumberBox::LVGLNumberBox(lv_obj_t* parent, const int minValue, const int max
         }
     };
 
-    auto onChangedCb = [this](AbstractRangeValueContainer* obj, const int value) {
-        // LVGL_DBG_PRINT("handling signal..");
-        this->_valueLbl->setText(value);
+    auto onChangedCb = [this](AbstractRangeValueContainer*, const int value) {
+        this->_valueLbl->setText(this->value());
+
+        this->value() == this->minValue() ?
+            this->_leftBtn->disable() :
+            this->_leftBtn->enable();
+
+        this->value() == this->maxValue() ?
+            this->_rightBtn->disable() :
+            this->_rightBtn->enable();
     };
-    
+
     _leftBtn->setEventCallBack(minusCb);
     _rightBtn->setEventCallBack(plusCb);
-    onChanged(onChangedCb);
+    setInnerValueChangedCallback(onChangedCb);
 }
 
 void LVGLNumberBox::redrawText() {

@@ -1,7 +1,7 @@
 #include "AbstractRangeValueContainer.hpp"
 
 AbstractRangeValueContainer::AbstractRangeValueContainer(/*lv_obj_t* parent, */const int minValue, const int maxValue, const size_t step)
-    :   _onValueChangedCb{nullptr},
+    :   _innerValueChangedCallback{nullptr},
         _minValue{minValue},
         _maxValue{maxValue},
         _step{step},
@@ -20,8 +20,12 @@ AbstractRangeValueContainer& AbstractRangeValueContainer::operator--() {
     return *this;
 }
 
-void AbstractRangeValueContainer::onChanged(valueChangedCallback_t cb) {
-    _onValueChangedCb = cb;
+void AbstractRangeValueContainer::setInnerValueChangedCallback(valueChangedCallback_t cb) {
+    _innerValueChangedCallback = cb;
+}
+
+void AbstractRangeValueContainer::onValueChanged(valueChangedCallback_t cb) {
+    _extValueChangedCallback = cb;
 }
 
 void AbstractRangeValueContainer::increment() {
@@ -65,8 +69,11 @@ void AbstractRangeValueContainer::setStep(const size_t step) {
 void AbstractRangeValueContainer::emitChangedSignal() {
     if (_prevValue != _currentValue) {
         _prevValue = _currentValue;
-        if (_onValueChangedCb) {
-            _onValueChangedCb(this, _currentValue);
+        if (_innerValueChangedCallback) {
+            _innerValueChangedCallback(this, _currentValue);
+        }
+        if (_extValueChangedCallback) {
+            _extValueChangedCallback(this, _currentValue);
         }
     }
 }

@@ -16,7 +16,7 @@ void LVGLBase::eventHandler(lv_obj_t * obj, lv_event_t event) {
         base->_eventCallback(event);
     }
     else {
-        LVGL_DBG_PRINT("callback not found");
+        // LVGL_DBG_PRINT("callback not found");
     }
 }
 
@@ -55,7 +55,6 @@ void LVGLBase::setParent(lv_obj_t* const parent) {
 }
 
 void LVGLBase::setStyle(const uint8_t part, lv_style_t* const style) {
-    
     lv_obj_add_style(_obj, part, style);
 }
 

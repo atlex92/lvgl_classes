@@ -28,3 +28,11 @@ void LVGLButton::setSize(const size_t w, const size_t h) {
     lv_obj_set_auto_realign(_obj, false);
     LVGLBase::setSize(w, h);
 }
+
+void LVGLButton::disable() {
+    lv_btn_set_state(_obj, LV_BTN_STATE_DISABLED);
+}
+
+void LVGLButton::enable() {
+    lv_btn_set_state(_obj, LV_BTN_STATE_RELEASED);
+}

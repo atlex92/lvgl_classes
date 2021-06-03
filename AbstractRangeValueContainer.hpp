@@ -29,9 +29,13 @@ class AbstractRangeValueContainer /*: public LVGLBase */{
         AbstractRangeValueContainer& operator++(); 
         AbstractRangeValueContainer& operator--();
 
-        void onChanged(valueChangedCallback_t cb);
+        void onValueChanged(valueChangedCallback_t cb);
+
+    protected:
+        void setInnerValueChangedCallback(valueChangedCallback_t cb);
     private:
-        valueChangedCallback_t _onValueChangedCb;
+        valueChangedCallback_t _innerValueChangedCallback;
+        valueChangedCallback_t _extValueChangedCallback;
         void emitChangedSignal();
         int _minValue;
         int _maxValue;

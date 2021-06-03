@@ -4,3 +4,4 @@
 #include "LVGLNumberBox.hpp"
 #include "LVGLRow.hpp"
 #include "LVGLLabel.hpp"
+#include "LVGLTabView.hpp"
