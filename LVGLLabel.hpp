@@ -33,9 +33,4 @@ class LVGLLabel : public LVGLBase{
         void setAlignMode(const lv_label_align_t mode) {
             lv_label_set_align(_obj, mode);
         }
-
-        void setTextColor(const lv_color_t color) {
-            lv_style_set_text_color(&_style, LV_STATE_DEFAULT, color);
-            lv_obj_add_style(_obj, LV_OBJ_PART_MAIN, &_style);
-        }
 };

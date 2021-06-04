@@ -1,16 +1,11 @@
 #pragma once
 
-#include "LVGLBase.hpp"
+#include "LVGLContainer.hpp"
 
-class LVGLRow : public LVGLBase {
+class LVGLRow : public LVGLContainer {
 
     public:
-
         explicit LVGLRow(LVGLBase* const parent = NULL);
         explicit LVGLRow(lv_obj_t* const parent);
-        explicit LVGLRow(lv_obj_t* const src, LVGLBase* const parent);
-
-        void addObject(LVGLBase* const obj);
-    private:
-        
+        explicit LVGLRow(lv_obj_t* const src, LVGLBase* const parent);        
 };

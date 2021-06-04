@@ -1,24 +1,25 @@
 #include "LVGLButton.hpp"
-#include "assert.h"
+// #include "assert.h"
 
 LVGLButton::LVGLButton(const std::string& txt, lv_obj_t* const parent)
     :   LVGLBase(lv_btn_create(parent, NULL), parent),
         _lbl{new LVGLLabel(txt, this)} {
-    assert(_obj);
-    assert(_lbl);
+    // assert(_obj);
+    // assert(_lbl);
     LVGL_DBG_PRINT("LVGLButton #1 constructor");
 }
 
 LVGLButton::LVGLButton(const std::string& txt, LVGLBase* const parent)
     :   LVGLBase(lv_btn_create(parent? parent->innerData() : lv_disp_get_scr_act(NULL), NULL), parent),
         _lbl{new LVGLLabel(txt, this)} {
-    assert(_obj);
-    assert(_lbl);
+    // assert(_obj);
+    // assert(_lbl);
     LVGL_DBG_PRINT("LVGLButton #2 constructor");
 }
 
 LVGLButton::LVGLButton(lv_obj_t* const src, LVGLBase* const parent)
-    : LVGLBase(src, parent) {
+    :   LVGLBase(src, parent),
+        _lbl{new LVGLLabel("", this)} {
     LVGL_DBG_PRINT("LVGLButton #4 constructor");
 }
 

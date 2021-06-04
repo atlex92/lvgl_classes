@@ -9,10 +9,12 @@ class LVGLNumberBox : public AbstractRangeValueContainer, public LVGLRow {
 
     public:
         // constructors
-        explicit LVGLNumberBox(lv_obj_t* parent, const int minValue, const int maxValue, const size_t step);
+        explicit LVGLNumberBox(const int minValue, const int maxValue, const size_t step, LVGLBase* const parent);
+        explicit LVGLNumberBox(const int minValue, const int maxValue, const size_t step, lv_obj_t* const parent);
 
     private:
         void redrawText();
+        void init();
 
         LVGLButton* _leftBtn;
         LVGLLabel* _valueLbl;

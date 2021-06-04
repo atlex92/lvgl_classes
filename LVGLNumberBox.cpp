@@ -1,18 +1,31 @@
 #include "LVGLNumberBox.hpp"
 
-LVGLNumberBox::LVGLNumberBox(lv_obj_t* parent, const int minValue, const int maxValue, const size_t step)
-    :   AbstractRangeValueContainer(/*parent, */minValue, maxValue, step),
+LVGLNumberBox::LVGLNumberBox(const int minValue, const int maxValue, const size_t step, lv_obj_t* const parent)
+    :   AbstractRangeValueContainer(minValue, maxValue, step),
         LVGLRow(parent),
-        // _row{new LVGLRow(parent)},
         _leftBtn{new LVGLButton("-", this)},
         _valueLbl{new LVGLLabel("", this)},
         _rightBtn{new LVGLButton("+", this)} {
+    LVGL_DBG_PRINT("LVGLNumberBox #1 constructor");
+    init();
+}
+
+LVGLNumberBox::LVGLNumberBox(const int minValue, const int maxValue, const size_t step, LVGLBase* const parent) 
+    : AbstractRangeValueContainer(minValue, maxValue, step),
+        LVGLRow(parent),
+        _leftBtn{new LVGLButton("-", this)},
+        _valueLbl{new LVGLLabel("", this)},
+        _rightBtn{new LVGLButton("+", this)} {
+    LVGL_DBG_PRINT("LVGLNumberBox #2 constructor");
+    init();
+}
+
+void LVGLNumberBox::init() {
     
     _leftBtn->setSize(30,30);
     _rightBtn->setSize(30,30);
     _valueLbl->setSize(90, 40);
-
-    _valueLbl->setText(minValue);
+    _valueLbl->setText(minValue());
     _valueLbl->setAlignMode(LV_LABEL_ALIGN_CENTER);
 
     auto minusCb = [this](const lv_event_t event) {

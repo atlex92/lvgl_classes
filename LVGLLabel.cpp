@@ -12,7 +12,7 @@ LVGLLabel::LVGLLabel(const std::string& txt, LVGLBase* const parent)
     // lv_style_set_border_color(&_style, LV_STATE_DEFAULT, LV_COLOR_RED);
     // lv_style_set_border_width(&_style, LV_STATE_DEFAULT, 4);
 
-    lv_obj_add_style(_obj, LV_OBJ_PART_MAIN, &_style);
+    // lv_obj_add_style(_obj, LV_OBJ_PART_MAIN, &_style);
 }
 
 LVGLLabel::LVGLLabel(const std::string& txt, lv_obj_t* const parent)
