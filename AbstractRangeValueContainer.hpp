@@ -1,45 +1,76 @@
 #pragma once
 
-#include "LVGLBase.hpp"
 #include "stdint.h"
-#include <functional>
+#include "AbstractValueChangable.hpp"
+#include <math.h>
 
-
-
-class AbstractRangeValueContainer /*: public LVGLBase */{
-
+template<typename ValueType> 
+class AbstractRangeValueContainer : public AbstractValueChangable<ValueType> {
     public:
-        typedef std::function<void(AbstractRangeValueContainer*, const int)> valueChangedCallback_t;
-        explicit AbstractRangeValueContainer(/*lv_obj_t* parent, */const int minValue, const int maxValue,
-            const size_t step);
+        explicit AbstractRangeValueContainer(const ValueType minValue, const ValueType maxValue, const ValueType step) 
+            :   _minValue{minValue},
+                _maxValue{maxValue},
+                _step{static_cast<ValueType>(std::fabs(step))} {
+
+        }
         // getters
-        size_t step() const { return _step; }
-        int minValue() const { return _minValue; }
-        int maxValue() const { return _maxValue; }
-        int value() const { return _currentValue; }
+        ValueType step() const { return _step; }
+        ValueType minValue() const { return _minValue; }
+        ValueType maxValue() const { return _maxValue; }
+        // int value() const { return _currentValue; }
         // setters
-        void setValue(const int value);
-        void setRange(const int min, const int max);
-        void setMinValue(const int min);
-        void setMaxValue(const int max);
-        void setStep(const size_t step);
+        // void setValue(const int value);
+        void setRange(const ValueType min, const ValueType max) {
+            _minValue = min;
+            _maxValue = max;
+        }
+        void setMinValue(const ValueType min) {
+            _minValue =  min;
+        }
+        void setMaxValue(const ValueType max) {
+            _maxValue = max;
+        }
+        void setStep(const ValueType step) {
+            _step = std::fabs(step);
+        }
 
-        void increment();
-        void decrement();
-        AbstractRangeValueContainer& operator++(); 
-        AbstractRangeValueContainer& operator--();
+        void increment() {
+            this->_value += _step;
+            if (this->_value > _maxValue){
+                this->_value = _maxValue;
+            }
+            this->emitChangedSignal();
+        }
 
-        void onValueChanged(valueChangedCallback_t cb);
+        void decrement() {
+            this->_value -= _step;
+            if (this->_value < _minValue){
+                this->_value = _minValue;
+            }
+            this->emitChangedSignal();
+        }
+
+        AbstractRangeValueContainer& operator++() {
+            increment();
+            return *this;
+        }
+
+        AbstractRangeValueContainer& operator--() {
+            decrement();
+            return *this;
+        }
+
+        // void onValueChanged(valueChangedCallback_t cb);
 
     protected:
-        void setInnerValueChangedCallback(valueChangedCallback_t cb);
+        // void setInnerValueChangedCallback(valueChangedCallback_t cb);
     private:
-        valueChangedCallback_t _innerValueChangedCallback;
-        valueChangedCallback_t _extValueChangedCallback;
-        void emitChangedSignal();
-        int _minValue;
-        int _maxValue;
-        size_t _step;
-        int _currentValue;
-        int _prevValue;
+        // valueChangedCallback_t _innerValueChangedCallback;
+        // valueChangedCallback_t _extValueChangedCallback;
+        // void emitChangedSignal();
+        ValueType _minValue;
+        ValueType _maxValue;
+        ValueType _step;
+        // int _currentValue;
+        // int _prevValue;
 };

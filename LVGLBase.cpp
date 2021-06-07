@@ -74,9 +74,13 @@ void LVGLBase::align(LVGLBase* const ref, const lv_align_t align, const lv_coord
 //     lv_obj_set_style_local_text_font(_obj, part, state, font);
 // }
 
-// void LVGLBase::setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
-//     lv_obj_set_style_local_text_color(_obj, part, state, color);
-// }
+void LVGLBase::setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
+    lv_obj_set_style_local_text_color(_obj, part, state, color);
+}
+
+void LVGLBase::setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
+    lv_obj_set_style_local_bg_color(_obj, part, state, color);
+}
 
 LVGLBase::~LVGLBase() {
     LVGL_DBG_PRINT("LVGLBase destructor");

@@ -6,3 +6,4 @@
 #include "LVGLColumn.hpp"
 #include "LVGLLabel.hpp"
 #include "LVGLTabView.hpp"
+#include "LVGLSwitch.hpp"
