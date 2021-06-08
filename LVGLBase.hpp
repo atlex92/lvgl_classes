@@ -20,9 +20,9 @@ class LVGLBase {
         void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
 
-
-        // align
         void align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
+        void hide();
+        void show();
 
         // size API
         virtual void setSize(const size_t w, const size_t h);

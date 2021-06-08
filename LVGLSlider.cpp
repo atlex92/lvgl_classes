@@ -18,16 +18,20 @@ LVGLSlider::LVGLSlider(const int minValue, const int maxValue, const size_t step
 
 void LVGLSlider::init() {
 
-    // lv_slider_set_left_value(_obj, minValue(), 500);
     lv_slider_set_range(_obj, minValue(), maxValue());
+    LVGL_DBG_PRINT("LVGLSlider:init");
 
     setValue(minValue());
 
     auto eventCb = [this](const lv_event_t event) {
         switch (event) {
             case LV_EVENT_VALUE_CHANGED:
-                this->_value = lv_slider_get_value(this->_obj);
-                LVGL_DBG_PRINT(value());
+                // this->_value = lv_slider_get_value(this->_obj);
+                // LVGL_DBG_PRINT(value());
+            break;
+            case LV_EVENT_RELEASED:
+                this->setValue(lv_slider_get_value(this->_obj));
+                LVGL_DBG_PRINT("LV_EVENT_RELEASED");
             break;
 
             default:
@@ -36,7 +40,10 @@ void LVGLSlider::init() {
     };
 
     auto onChangedCb = [this](AbstractValueChangable<int>*) {
-        lv_slider_set_value(_obj, this->value(), 100);
+        if (lv_slider_get_value(this->_obj) != this->value()) {
+            lv_slider_set_value(_obj, this->value(), 100);
+            LVGL_DBG_PRINT("setted!");
+        }
     };
 
 

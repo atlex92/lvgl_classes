@@ -8,3 +8,4 @@
 #include "LVGLTabView.hpp"
 #include "LVGLSwitch.hpp"
 #include "LVGLSlider.hpp"
+#include "LVGLUnlocker.hpp"

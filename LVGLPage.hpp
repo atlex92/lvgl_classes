@@ -9,4 +9,5 @@ class LVGLPage : public LVGLBase {
         explicit LVGLPage(lv_obj_t* const src, LVGLBase* const parent);
 
         void setScrollBarMode(const lv_scrollbar_mode_t mode);
+        void setScrollPropogation(const bool val);
 };

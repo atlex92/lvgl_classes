@@ -33,3 +33,7 @@ LVGLPage::LVGLPage(lv_obj_t* const src, LVGLBase* const parent)
 void LVGLPage::setScrollBarMode(const lv_scrollbar_mode_t mode) {
     lv_page_set_scrlbar_mode(_obj, mode);    
 }
+
+void LVGLPage::setScrollPropogation(const bool val) { 
+    lv_page_set_scroll_propagation(_obj, val);
+}

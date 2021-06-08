@@ -30,6 +30,14 @@ LVGLBase::LVGLBase(lv_obj_t* const lvglObj, LVGLBase* const parent)
     lv_obj_set_event_cb(_obj, eventHandler);
 }
 
+void LVGLBase::hide() {
+    lv_obj_set_hidden(_obj, true);
+}
+
+void LVGLBase::show() {
+    lv_obj_set_hidden(_obj, false);
+}
+
 LVGLBase::LVGLBase(lv_obj_t* const lvglObj, lv_obj_t* const parent)
     :   _parent{NULL},
         _obj{lvglObj},
