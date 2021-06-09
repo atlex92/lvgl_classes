@@ -29,7 +29,7 @@ void LVGLUnlocker::init() {
     lv_style_set_radius(&defaultKnobStyle, LV_STATE_DEFAULT, 5);
 
     lv_style_set_pad_hor(&defaultKnobStyle, LV_STATE_DEFAULT, width() * 0.04);
-    lv_style_set_pad_ver(&defaultKnobStyle, LV_STATE_DEFAULT, height() * 0.6);
+    lv_style_set_pad_ver(&defaultKnobStyle, LV_STATE_DEFAULT, height() * 1.0);
 
     lv_slider_set_range(_obj, minValue(), maxValue());
 

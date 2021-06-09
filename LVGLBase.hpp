@@ -17,8 +17,14 @@ class LVGLBase {
         void setStyle(const uint8_t part, lv_style_t* const style);
         void resetStyle(const uint8_t part);
         // void setStyleTextFont(const lv_part_style_t part, const lv_state_t state, const lv_font_t* font);
+        // style color
         void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+        void setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+        void setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+
+        void setStyleBorderWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
+        void setStyleOutlineWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
 
         void align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
         void hide();

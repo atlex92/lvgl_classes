@@ -90,6 +90,22 @@ void LVGLBase::setStyleBgColor(const lv_part_style_t part, const lv_state_t stat
     lv_obj_set_style_local_bg_color(_obj, part, state, color);
 }
 
+void LVGLBase::setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
+    lv_obj_set_style_local_border_color(_obj, part, state, color);
+}
+
+void LVGLBase::setStyleBorderWidth(const lv_part_style_t part, const lv_state_t state, const size_t width) {
+    lv_obj_set_style_local_border_width(_obj, part, state, width);
+}
+
+void LVGLBase::setStyleOutlineWidth(const lv_part_style_t part, const lv_state_t state, const size_t width) {
+    lv_obj_set_style_local_outline_width(_obj, part, state, width);
+}
+
+void LVGLBase::setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
+    lv_obj_set_style_local_outline_color(_obj, part, state, color);
+}
+
 LVGLBase::~LVGLBase() {
     LVGL_DBG_PRINT("LVGLBase destructor");
     lv_obj_del(_obj);
