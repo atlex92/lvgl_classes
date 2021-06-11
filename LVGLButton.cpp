@@ -1,5 +1,4 @@
 #include "LVGLButton.hpp"
-// #include "assert.h"
 
 LVGLButton::LVGLButton(const std::string& txt, lv_obj_t* const parent)
     :   LVGLBase(lv_btn_create(parent, NULL), parent),
@@ -36,6 +35,5 @@ void LVGLButton::disable() {
 
 void LVGLButton::enable() {
     setState(LV_BTN_STATE_RELEASED);
-    // lv_btn_set_state(_obj, LV_BTN_STATE_RELEASED);
     _lbl->setState(LV_STATE_DEFAULT);
 }
