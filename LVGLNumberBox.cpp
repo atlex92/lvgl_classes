@@ -60,7 +60,7 @@ void LVGLNumberBox::init() {
     };
 
     auto onChangedCb = [this](AbstractValueChangable<int>*) {
-        this->_valueLbl->setText("%d\t%s", value(), _label.c_str());
+        redrawText();
 
         this->value() == this->minValue() ?
             this->_leftBtn->disable() :
@@ -77,7 +77,7 @@ void LVGLNumberBox::init() {
 }
 
 void LVGLNumberBox::redrawText() {
-    _valueLbl->setText(value());
+    _valueLbl->setText("%d\t%s", value(), _label.c_str());
 }
 
 void LVGLNumberBox::setButtonsStyle(const uint8_t part, lv_style_t* const style) {

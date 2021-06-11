@@ -2,19 +2,35 @@
 #include "lvgl.h"
 #include "lvgl_debug.hpp"
 #include <functional>
-
+#include "LVGLStyle.hpp"
+#include "AbstractTheme.hpp"
 
 typedef std::function<void(const lv_event_t event)> eventCallback_t;
-
+enum class eLvglType {
+    LVGL_CLASS_SWITCH,
+    LVGL_CLASS_PAGE,
+    LVGL_CLASS_ROW,
+    LVGL_CLASS_COLUMN,
+    LVGL_CLASS_LABEL,
+    LVGL_CLASS_TABVIEW,
+    LVGL_CLASS_BUTTON,
+    LVGL_CLASS_SLIDER,
+    LVGL_CLASS_UNLOCKER,
+    LVGL_CLASS_MAX   
+};
 class LVGLBase {
     
     public:
         virtual ~LVGLBase();
         explicit LVGLBase(lv_obj_t* const lvglObj, LVGLBase* const parent);
         explicit LVGLBase(lv_obj_t* const lvglObj, lv_obj_t* const parent = lv_disp_get_scr_act(NULL));
+        virtual eLvglType type() const = 0;
+        static void setTheme(AbstractTheme* const theme);
         
+        void setState(const lv_state_t state);
         // style API
         void setStyle(const uint8_t part, lv_style_t* const style);
+        void setStyle(const uint8_t part, LVGLStyle& style);
         void resetStyle(const uint8_t part);
         // void setStyleTextFont(const lv_part_style_t part, const lv_state_t state, const lv_font_t* font);
         // style color
@@ -22,6 +38,9 @@ class LVGLBase {
         void setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+        void setPaddings(const lv_part_style_t part, const lv_state_t state, const int hor, const int ver);
+        void setInnerPadding(const lv_part_style_t part,const lv_state_t state, const int value);
+
 
         void setStyleBorderWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
         void setStyleOutlineWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
@@ -53,8 +72,9 @@ class LVGLBase {
         }
     private:
         static void eventHandler(lv_obj_t * obj, lv_event_t event);
-
+        static AbstractTheme* _theme;
     protected:
+        void applyTheme();
         LVGLBase* _parent;
         lv_obj_t* _obj;
         eventCallback_t _eventCallback;

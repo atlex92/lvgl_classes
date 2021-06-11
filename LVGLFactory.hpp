@@ -1,12 +1,16 @@
 // #pragma once
 
 // #include "LVGLBase.hpp"
+// #include "lvgl_classes.h"
+// #include "AbstractTheme.hpp"
 
-// enum class eLvglType{
-//     LVGL_PAGE
-// };
+// class LVGLFactory {
 
-// struct  LVGLFactory {
-    
-//     static LVGLBase* createFromRawObject(lv_obj_t* const src, lv_obj_t* const parent, const  eLvglType type);
+//     public:
+//         static LVGLButton* createButton(const std::string& label, LVGLBase* parent);
+//         static LVGLSwitch* createSwitch(const size_t animTime, LVGLBase* parent);
+//         static LVGLTabView* createTabView(LVGLBase* parent);
+//         static void setTheme(AbstractTheme* const theme);
+//     private:
+//         static AbstractTheme* _theme;
 // };

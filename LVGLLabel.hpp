@@ -7,6 +7,7 @@
 class LVGLLabel : public LVGLBase{
 
     public:
+        eLvglType type() const override {return eLvglType::LVGL_CLASS_LABEL;}
         explicit LVGLLabel(const std::string& txt, LVGLBase* const parent = NULL);
         explicit LVGLLabel(const std::string& txt, lv_obj_t* const parent);
         explicit LVGLLabel(lv_obj_t* const src, LVGLBase* const parent = NULL);
@@ -18,8 +19,7 @@ class LVGLLabel : public LVGLBase{
         template<typename ... Args>
         void setText(const char * const frmt, Args ... args) {
             lv_label_set_text_fmt(_obj, frmt, args ...);
-            // lv_obj_align_mid(_obj, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
-            // lv_obj_align_origo_y(_obj, NULL, LV_ALIGN_IN_RIGHT_MID, 0);
+
         }
 
         void setText(const int value) {

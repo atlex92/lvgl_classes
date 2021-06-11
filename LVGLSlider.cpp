@@ -25,15 +25,10 @@ void LVGLSlider::init() {
 
     auto eventCb = [this](const lv_event_t event) {
         switch (event) {
-            case LV_EVENT_VALUE_CHANGED:
-                // this->_value = lv_slider_get_value(this->_obj);
-                // LVGL_DBG_PRINT(value());
-            break;
             case LV_EVENT_RELEASED:
                 this->setValue(lv_slider_get_value(this->_obj));
                 LVGL_DBG_PRINT("LV_EVENT_RELEASED");
             break;
-
             default:
                 break;
         }

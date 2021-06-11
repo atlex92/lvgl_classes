@@ -8,6 +8,7 @@ class LVGLNumberBox : public AbstractRangeValueContainer<int>, public LVGLRow {
 
     public:
         // constructors
+        eLvglType type() const override {return eLvglType::LVGL_CLASS_MAX;}
         explicit LVGLNumberBox(const int minValue, const int maxValue, const size_t step, const std::string& label, LVGLBase* const parent);
         explicit LVGLNumberBox(const int minValue, const int maxValue, const size_t step, const std::string& label, lv_obj_t* const parent);
         void setButtonsStyle(const uint8_t part, lv_style_t* const style);

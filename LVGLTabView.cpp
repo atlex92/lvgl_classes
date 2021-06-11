@@ -5,11 +5,13 @@ LVGLTabView::LVGLTabView(LVGLBase* const parent)
         parent) {
 
     LVGL_DBG_PRINT("LVGLTabView #1 constructor ");
+    applyTheme();
 }
 
 LVGLTabView::LVGLTabView(lv_obj_t* const parent)
     :   LVGLBase(lv_tabview_create(parent, NULL)) {
     LVGL_DBG_PRINT("LVGLTabView #2 constructor ");
+    applyTheme();
 }
 
 LVGLPage* LVGLTabView::addTab(const std::string& title) {
@@ -22,4 +24,8 @@ void LVGLTabView::setNavigationBarsPosition(const uint8_t position) {
 
 void LVGLTabView::setAnimationTime(const size_t ms) {
     lv_tabview_set_anim_time(_obj, ms);
+}
+
+void LVGLTabView::setIndicatorWidth(const size_t w) {
+    lv_obj_set_style_local_size(innerData(), LV_TABVIEW_PART_INDIC, LV_STATE_DEFAULT, w);
 }

@@ -5,13 +5,15 @@ LVGLSwitch::LVGLSwitch(const size_t animTime, LVGLBase* const parent)
         _animTime(animTime) {
     
     init();  
+    applyTheme();
 }
 
 LVGLSwitch::LVGLSwitch(const size_t animTime, lv_obj_t* const parent)
     :   LVGLBase(lv_switch_create(parent, NULL), parent),
         _animTime(animTime) {
     
-    init();   
+    init();
+    applyTheme();
 }
 
 void LVGLSwitch::init() {

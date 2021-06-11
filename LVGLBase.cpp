@@ -3,6 +3,12 @@
 #include <iostream>
 using namespace std;
 
+AbstractTheme* LVGLBase::_theme {nullptr};
+
+void LVGLBase::setTheme(AbstractTheme* const theme) {
+    _theme = theme;
+}
+
 void LVGLBase::eventHandler(lv_obj_t * obj, lv_event_t event) {
 
     // LVGL_DBG_PRINT("Event handler");
@@ -30,21 +36,89 @@ LVGLBase::LVGLBase(lv_obj_t* const lvglObj, LVGLBase* const parent)
     lv_obj_set_event_cb(_obj, eventHandler);
 }
 
-void LVGLBase::hide() {
-    lv_obj_set_hidden(_obj, true);
-}
-
-void LVGLBase::show() {
-    lv_obj_set_hidden(_obj, false);
-}
-
 LVGLBase::LVGLBase(lv_obj_t* const lvglObj, lv_obj_t* const parent)
     :   _parent{NULL},
         _obj{lvglObj},
         _eventCallback{nullptr} {
+
     LVGL_DBG_PRINT("LVGLBase #2 constructor");
     lv_obj_set_user_data(_obj, this);
     lv_obj_set_event_cb(_obj, eventHandler);
+}
+
+void LVGLBase::hide() {
+    lv_obj_set_hidden(_obj, true);
+}
+
+void LVGLBase::applyTheme() {
+
+    if (_theme) {
+        LVGL_DBG_PRINT("applying theme for object");
+        LVGL_DBG_PRINT((size_t)type());
+        switch (type()) {
+            case eLvglType::LVGL_CLASS_BUTTON:
+                resetStyle(LV_BTN_PART_MAIN);
+                setStyle(LV_BTN_PART_MAIN, _theme->commonBgStyle());
+                setStyle(LV_BTN_PART_MAIN, _theme->commonBorderStyle());
+                setStyle(LV_BTN_PART_MAIN, _theme->commonOutlineStyle());
+                setStyle(LV_BTN_PART_MAIN, _theme->commonShapeStyle());
+            break;
+
+            case eLvglType::LVGL_CLASS_PAGE:
+                resetStyle(LV_PAGE_PART_BG);
+                setStyle(LV_PAGE_PART_BG, _theme->commonBgStyle());
+            break;
+
+             case eLvglType::LVGL_CLASS_COLUMN:
+             case eLvglType::LVGL_CLASS_ROW:
+                resetStyle(LV_CONT_PART_MAIN);
+                setStyle(LV_CONT_PART_MAIN, _theme->commonBgStyle());
+                setStyle(LV_CONT_PART_MAIN, _theme->containerPadStyle());
+            break;
+
+            case eLvglType::LVGL_CLASS_TABVIEW:
+                resetStyle(LV_TABVIEW_PART_TAB_BG);
+                resetStyle(LV_TABVIEW_PART_TAB_BTN);
+                resetStyle(LV_TABVIEW_PART_INDIC);
+
+                setStyle(LV_TABVIEW_PART_TAB_BG, _theme->commonBgStyle());
+                setStyle(LV_TABVIEW_PART_TAB_BTN, _theme->tabButtonStyle());
+                setStyle(LV_TABVIEW_PART_INDIC, _theme->indicatorStyle());
+            break;
+
+            case eLvglType::LVGL_CLASS_SWITCH:
+                resetStyle(LV_SWITCH_PART_BG);
+                resetStyle(LV_SWITCH_PART_INDIC);
+                resetStyle(LV_SWITCH_PART_KNOB);
+                setStyle(LV_SWITCH_PART_BG, _theme->commonBgStyle());
+                setStyle(LV_SWITCH_PART_BG, _theme->commonBorderStyle());
+                setStyle(LV_SWITCH_PART_BG, _theme->commonOutlineStyle());
+                setStyle(LV_SWITCH_PART_BG, _theme->commonShapeStyle());   
+                setStyle(LV_SWITCH_PART_INDIC, _theme->indicatorStyle());     
+                setStyle(LV_SWITCH_PART_KNOB, _theme->knobStyle());  
+            break;
+
+            case eLvglType::LVGL_CLASS_LABEL:
+                resetStyle(LV_LABEL_PART_MAIN);
+                setStyle(LV_LABEL_PART_MAIN, _theme->commonTextStyle());          
+            break;
+            default:
+            break;
+        }
+    }
+}
+
+void LVGLBase::setPaddings(const lv_part_style_t part,const lv_state_t state, const int hor, const int ver) {
+    lv_obj_set_style_local_pad_hor(_obj, part, state, hor);
+    lv_obj_set_style_local_pad_ver(_obj, part, state, ver);
+}
+
+void LVGLBase::setInnerPadding(const lv_part_style_t part,const lv_state_t state, const int value) {
+    lv_obj_set_style_local_pad_inner(_obj, part, state, value);
+}
+
+void LVGLBase::show() {
+    lv_obj_set_hidden(_obj, false);
 }
 
 void LVGLBase::setParent(LVGLBase* const parent){
@@ -57,6 +131,11 @@ void LVGLBase::setParent(LVGLBase* const parent){
 void LVGLBase::setStyle(const uint8_t part, lv_style_t* const style) {
     lv_obj_add_style(_obj, part, style);
 }
+
+void LVGLBase::setStyle(const uint8_t part, LVGLStyle& style) {
+    setStyle(part, style.style());
+}
+
 
 void LVGLBase::resetStyle(const uint8_t part) {
     lv_obj_reset_style_list(_obj, part);
@@ -105,6 +184,11 @@ void LVGLBase::setStyleOutlineWidth(const lv_part_style_t part, const lv_state_t
 void LVGLBase::setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
     lv_obj_set_style_local_outline_color(_obj, part, state, color);
 }
+
+void LVGLBase::setState(const lv_state_t state) {
+    lv_obj_set_state(_obj, state);
+}
+
 
 LVGLBase::~LVGLBase() {
     LVGL_DBG_PRINT("LVGLBase destructor");

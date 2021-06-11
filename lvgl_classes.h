@@ -9,3 +9,4 @@
 #include "LVGLSwitch.hpp"
 #include "LVGLSlider.hpp"
 #include "LVGLUnlocker.hpp"
+#include "LVGLArc.hpp"
