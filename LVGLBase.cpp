@@ -54,7 +54,7 @@ void LVGLBase::applyTheme() {
 
     if (_theme) {
         LVGL_DBG_PRINT("applying theme for object");
-        LVGL_DBG_PRINT((size_t)type());
+        // LVGL_DBG_PRINT((size_t)type());
         switch (type()) {
             case eLvglType::LVGL_CLASS_BUTTON:
                 resetStyle(LV_BTN_PART_MAIN);
