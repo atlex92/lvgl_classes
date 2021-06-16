@@ -33,8 +33,11 @@ class AbstractTheme {
         LVGLStyle& commonTextStyle() {
             return _textStyle;
         }
-         LVGLStyle& containerPadStyle() {
+        LVGLStyle& containerPadStyle() {
             return _containerPaddingStyle;
+        }
+        LVGLStyle& unlockerKnobStyle() {
+            return _unlockerKnobStyle;
         }
         void init();
     private:
@@ -47,8 +50,7 @@ class AbstractTheme {
         virtual void fillTabButtonStyle(LVGLStyle&){};
         virtual void fillTextStyle(LVGLStyle&){};
         virtual void fillContainerPadStyle(LVGLStyle&){};
-
-
+        virtual void fillUnlockerKnobStyle(LVGLStyle&){};
 
 
         LVGLStyle _bgStyle;
@@ -61,6 +63,6 @@ class AbstractTheme {
         LVGLStyle _indicatorStyle;
         LVGLStyle _knobStyle;
         LVGLStyle _tabBtnsStyle;
-
+        LVGLStyle _unlockerKnobStyle;
 
 };

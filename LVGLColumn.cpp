@@ -16,7 +16,7 @@ LVGLColumn::LVGLColumn(lv_obj_t* const parent)
     LVGL_DBG_PRINT("LVGLColumn #2 constructor");
     setClickable(false);
     setFit(LV_FIT_TIGHT);
-    setLayout(LV_LAYOUT_ROW_MID);  
+    setLayout(LV_LAYOUT_COLUMN_MID);  
     applyTheme();
 }
 

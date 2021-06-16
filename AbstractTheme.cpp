@@ -16,5 +16,5 @@ void AbstractTheme::init() {
     fillTabButtonStyle(_tabBtnsStyle);
     fillTextStyle(_textStyle);
     fillContainerPadStyle(_containerPaddingStyle);
-
+    fillUnlockerKnobStyle(_unlockerKnobStyle);
 }

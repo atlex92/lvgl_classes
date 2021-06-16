@@ -8,6 +8,14 @@ typedef struct {
 }RectShapeStyle_t;
 
 typedef struct {
+    lv_state_t      state;
+    lv_style_int_t  lineWidth;
+    lv_color_t      lineColor;
+    lv_blend_mode_t lineBlendMode;
+    lv_opa_t        lineOpacityMode;
+    bool            lineRounded;
+}LineStyle_t;
+typedef struct {
     lv_state_t     state;
     lv_style_int_t topPadding;
     lv_style_int_t bottomPadding;

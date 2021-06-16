@@ -98,6 +98,25 @@ void LVGLBase::applyTheme() {
                 setStyle(LV_SWITCH_PART_KNOB, _theme->knobStyle());  
             break;
 
+            case eLvglType::LVGL_CLASS_UNLOCKER:
+                resetStyle(LV_SLIDER_PART_INDIC);
+                resetStyle(LV_SLIDER_PART_BG);
+                setStyle(LV_SLIDER_PART_BG, _theme->commonShapeStyle());   
+                setStyle(LV_SLIDER_PART_BG, _theme->commonBgStyle());
+                setStyle(LV_SLIDER_PART_BG, _theme->commonBorderStyle());
+                setStyle(LV_SLIDER_PART_BG, _theme->commonOutlineStyle());
+                setStyle(LV_SLIDER_PART_INDIC, _theme->indicatorStyle());    
+                setStyle(LV_SLIDER_PART_KNOB, _theme->unlockerKnobStyle());  
+            break;
+
+            case eLvglType::LVGL_CLASS_ARC:
+                resetStyle(LV_ARC_PART_BG);
+                resetStyle(LV_ARC_PART_INDIC);
+                setStyle(LV_ARC_PART_BG, _theme->commonShapeStyle());   
+                setStyle(LV_ARC_PART_BG, _theme->commonBgStyle());
+                setStyle(LV_ARC_PART_INDIC, _theme->indicatorStyle());
+            break;
+
             case eLvglType::LVGL_CLASS_LABEL:
                 resetStyle(LV_LABEL_PART_MAIN);
                 setStyle(LV_LABEL_PART_MAIN, _theme->commonTextStyle());          

@@ -7,6 +7,7 @@ LVGLUnlocker::LVGLUnlocker(LVGLBase* const parent)
     LVGL_DBG_PRINT("LVGLUnlocker #1 constructor");
 
     init();
+    // applyTheme();
 }
 
 LVGLUnlocker::LVGLUnlocker(lv_obj_t* const parent)
@@ -14,6 +15,7 @@ LVGLUnlocker::LVGLUnlocker(lv_obj_t* const parent)
     LVGL_DBG_PRINT("LVGLUnlocker #2 constructor");
 
     init();
+    applyTheme();
 }
 
 
@@ -28,8 +30,11 @@ void LVGLUnlocker::init() {
     lv_style_init(&defaultKnobStyle);
     lv_style_set_radius(&defaultKnobStyle, LV_STATE_DEFAULT, 5);
 
-    lv_style_set_pad_hor(&defaultKnobStyle, LV_STATE_DEFAULT, width() * 0.04);
-    lv_style_set_pad_ver(&defaultKnobStyle, LV_STATE_DEFAULT, height() * 1.0);
+    const size_t horPad { width() * 0.04};
+    const size_t vertPad { height() * 1.0};
+
+    lv_style_set_pad_hor(&defaultKnobStyle, LV_STATE_DEFAULT, horPad);
+    lv_style_set_pad_ver(&defaultKnobStyle, LV_STATE_DEFAULT, vertPad);
 
     lv_slider_set_range(_obj, minValue(), maxValue());
 

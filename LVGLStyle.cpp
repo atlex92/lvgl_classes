@@ -30,6 +30,15 @@ void LVGLStyle::addPaddingStyle(const PaddingStyle_t& style) {
     lv_style_set_pad_inner(&_style, style.state, style.innerPadding);
 }
 
+void LVGLStyle::addLineStyle(const LineStyle_t& style) {
+
+    lv_style_set_line_blend_mode(&_style, style.state, style.lineBlendMode);
+    lv_style_set_line_color(&_style, style.state, style.lineColor);
+    lv_style_set_line_opa(&_style, style.state, style.lineOpacityMode);
+    lv_style_set_line_width(&_style, style.state, style.lineWidth);
+    lv_style_set_line_rounded(&_style, style.state, style.lineRounded);
+}
+
 void LVGLStyle::addBorderStyle(const BorderStyle_t& style) {
     lv_style_set_border_blend_mode(&_style, style.state, style.borderBlendMode);
     lv_style_set_border_color(&_style, style.state, style.borderColor);

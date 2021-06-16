@@ -16,6 +16,8 @@ class LVGLStyle {
         void addBorderStyle(const BorderStyle_t& style);
         void addOutlineStyle(const OutlineStyle_t& style);        
         void addTextStyle(const TextStyle_t& style);
+        void addLineStyle(const LineStyle_t& style);
+
 
     private:
         lv_style_t _style;

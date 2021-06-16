@@ -7,7 +7,7 @@
 class LVGLArc : public AbstractValueChangable<int>, public LVGLBase {
 
     public:
-        eLvglType type() const override {return eLvglType::LVGL_CLASS_MAX;}
+        eLvglType type() const override {return eLvglType::LVGL_CLASS_ARC;}
         explicit LVGLArc(const bool adjustable, const size_t startAngle,
             const size_t endAngle, const std::string& label, LVGLBase* const parent);
 

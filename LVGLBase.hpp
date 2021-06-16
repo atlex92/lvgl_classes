@@ -16,6 +16,7 @@ enum class eLvglType {
     LVGL_CLASS_BUTTON,
     LVGL_CLASS_SLIDER,
     LVGL_CLASS_UNLOCKER,
+    LVGL_CLASS_ARC,
     LVGL_CLASS_MAX   
 };
 class LVGLBase {
