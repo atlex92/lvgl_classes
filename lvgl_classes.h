@@ -10,3 +10,5 @@
 #include "LVGLSlider.hpp"
 #include "LVGLUnlocker.hpp"
 #include "LVGLArc.hpp"
+#include "LVGLBatteryIndicator.hpp"
+#include "LVGLImage.hpp"

@@ -21,12 +21,12 @@ LVGLButton::LVGLButton(lv_obj_t* const src, LVGLBase* const parent)
     applyTheme();
 }
 
-void LVGLButton::setSize(const size_t w, const size_t h) {
+// void LVGLButton::setSize(const size_t w, const size_t h) {
 
-    lv_btn_set_fit(_obj, LV_FIT_NONE);
-    lv_obj_set_auto_realign(_obj, false);
-    LVGLBase::setSize(w, h);
-}
+//     lv_btn_set_fit(_obj, LV_FIT_NONE);
+//     lv_obj_set_auto_realign(_obj, false);
+//     LVGLBase::setSize(w, h);
+// }
 
 void LVGLButton::disable() {
     setState(LV_STATE_DISABLED);

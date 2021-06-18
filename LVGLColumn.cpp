@@ -18,6 +18,7 @@ LVGLColumn::LVGLColumn(lv_obj_t* const parent)
     setFit(LV_FIT_TIGHT);
     setLayout(LV_LAYOUT_COLUMN_MID);  
     applyTheme();
+    lv_obj_set_auto_realign(_obj, false);
 }
 
 LVGLColumn::LVGLColumn(lv_obj_t* const src, LVGLBase* const parent)

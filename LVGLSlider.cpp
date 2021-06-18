@@ -6,6 +6,7 @@ LVGLSlider::LVGLSlider(const int minValue, const int maxValue, const size_t step
     LVGL_DBG_PRINT("LVGLSlider #1 constructor");
 
     init();
+    applyTheme();
 }
 
 LVGLSlider::LVGLSlider(const int minValue, const int maxValue, const size_t step, lv_obj_t* const parent)
@@ -14,6 +15,7 @@ LVGLSlider::LVGLSlider(const int minValue, const int maxValue, const size_t step
     LVGL_DBG_PRINT("LVGLSlider #2 constructor");
 
     init();
+    applyTheme();
 }
 
 void LVGLSlider::init() {

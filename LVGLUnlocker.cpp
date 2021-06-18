@@ -30,8 +30,8 @@ void LVGLUnlocker::init() {
     lv_style_init(&defaultKnobStyle);
     lv_style_set_radius(&defaultKnobStyle, LV_STATE_DEFAULT, 5);
 
-    const size_t horPad { width() * 0.04};
-    const size_t vertPad { height() * 1.0};
+    const size_t horPad { static_cast<size_t>(width() * 0.04)};
+    const size_t vertPad { static_cast<size_t>(height() * 1.0)};
 
     lv_style_set_pad_hor(&defaultKnobStyle, LV_STATE_DEFAULT, horPad);
     lv_style_set_pad_ver(&defaultKnobStyle, LV_STATE_DEFAULT, vertPad);

@@ -62,6 +62,18 @@ void LVGLBase::applyTheme() {
                 setStyle(LV_BTN_PART_MAIN, _theme->commonBorderStyle());
                 setStyle(LV_BTN_PART_MAIN, _theme->commonOutlineStyle());
                 setStyle(LV_BTN_PART_MAIN, _theme->commonShapeStyle());
+
+                // lv_obj_set_style_local_line_dash_gap(_obj, LV_BTN_PART_MAIN, LV_STATE_PRESSED, 5);
+                // lv_obj_set_style_local_line_dash_width(_obj, LV_BTN_PART_MAIN, LV_STATE_PRESSED, 5);
+                // lv_obj_set_style_local_
+                // lv_obj_set_style_local_(_obj, LV_BTN_PART_MAIN, LV_STATE_PRESSED, 1);
+
+
+
+
+
+
+
             break;
 
             case eLvglType::LVGL_CLASS_PAGE:
@@ -98,6 +110,17 @@ void LVGLBase::applyTheme() {
                 setStyle(LV_SWITCH_PART_KNOB, _theme->knobStyle());  
             break;
 
+            case eLvglType::LVGL_CLASS_SLIDER:
+                resetStyle(LV_SLIDER_PART_INDIC);
+                resetStyle(LV_SLIDER_PART_BG);
+                setStyle(LV_SLIDER_PART_BG, _theme->commonShapeStyle());   
+                setStyle(LV_SLIDER_PART_BG, _theme->commonBgStyle());
+                setStyle(LV_SLIDER_PART_BG, _theme->commonBorderStyle());
+                setStyle(LV_SLIDER_PART_BG, _theme->commonOutlineStyle());
+                setStyle(LV_SLIDER_PART_INDIC, _theme->indicatorStyle());    
+                setStyle(LV_SLIDER_PART_KNOB, _theme->unlockerKnobStyle());  
+            break;
+
             case eLvglType::LVGL_CLASS_UNLOCKER:
                 resetStyle(LV_SLIDER_PART_INDIC);
                 resetStyle(LV_SLIDER_PART_BG);
@@ -124,6 +147,7 @@ void LVGLBase::applyTheme() {
             default:
             break;
         }
+        lv_obj_refresh_style(_obj, LV_OBJ_PART_ALL, LV_STYLE_PROP_ALL);
     }
 }
 
@@ -168,10 +192,6 @@ void LVGLBase::setClickable(const bool value) {
     lv_obj_set_click(_obj, value);
 }
 
-void LVGLBase::setFitMode(const uint8_t fitMode) {
-    lv_cont_set_fit(_obj, fitMode);
-}
-
 void LVGLBase::align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs) {
     lv_obj_align(_obj, ref->innerData() ? ref->innerData() : NULL, align, x_ofs, y_ofs);
 }
@@ -182,6 +202,10 @@ void LVGLBase::align(LVGLBase* const ref, const lv_align_t align, const lv_coord
 
 void LVGLBase::setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
     lv_obj_set_style_local_text_color(_obj, part, state, color);
+}
+
+void LVGLBase::setStyleLineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
+    lv_obj_set_style_local_line_color(_obj, part, state, color);
 }
 
 void LVGLBase::setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
@@ -206,6 +230,14 @@ void LVGLBase::setStyleOutlineColor(const lv_part_style_t part, const lv_state_t
 
 void LVGLBase::setState(const lv_state_t state) {
     lv_obj_set_state(_obj, state);
+}
+
+void LVGLBase::setFont(const lv_part_style_t part,const lv_state_t state, lv_font_t* const font) {
+    lv_obj_set_style_local_text_font(_obj, part, state, font);
+}
+
+void LVGLBase::setAutoRealign(const bool value) {
+    lv_obj_set_auto_realign(_obj, value);
 }
 
 

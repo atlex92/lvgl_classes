@@ -17,6 +17,8 @@ enum class eLvglType {
     LVGL_CLASS_SLIDER,
     LVGL_CLASS_UNLOCKER,
     LVGL_CLASS_ARC,
+    LVGL_CLASS_BATTERY_IND,
+    LVGL_CLASS_BATTERY_MAGE,
     LVGL_CLASS_MAX   
 };
 class LVGLBase {
@@ -28,6 +30,7 @@ class LVGLBase {
         virtual eLvglType type() const = 0;
         static void setTheme(AbstractTheme* const theme);
         
+        void setAutoRealign(const bool value);
         void setState(const lv_state_t state);
         // style API
         void setStyle(const uint8_t part, lv_style_t* const style);
@@ -39,9 +42,12 @@ class LVGLBase {
         void setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+        void setStyleLineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+        // paddings
         void setPaddings(const lv_part_style_t part, const lv_state_t state, const int hor, const int ver);
         void setInnerPadding(const lv_part_style_t part,const lv_state_t state, const int value);
-
+        // fonts
+        void setFont(const lv_part_style_t part,const lv_state_t state, lv_font_t* const font);
 
         void setStyleBorderWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
         void setStyleOutlineWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
@@ -61,7 +67,6 @@ class LVGLBase {
 
         void setParent(LVGLBase* const parent);
         void setClickable(const bool value);
-        void setFitMode(const uint8_t fitMode);
 
         //style
         void setEventCallBack(eventCallback_t cb) {
