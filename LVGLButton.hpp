@@ -4,7 +4,6 @@
 #include <string>
 
 class LVGLButton : public LVGLBase{
-    friend class LVGLFactory;
     public:
         eLvglType type() const override {return eLvglType::LVGL_CLASS_BUTTON;}
         explicit LVGLButton(const std::string& txt, LVGLBase* const parent = NULL);
