@@ -3,14 +3,12 @@
 LVGLPage::LVGLPage(LVGLBase* const parent)
     :   LVGLBase(lv_page_create(parent ? parent->innerData() : lv_disp_get_scr_act(NULL), NULL),parent) {
 
-    LVGL_DBG_PRINT("LVGLPage #1 constructor ");
     applyTheme();
 }
 
 LVGLPage::LVGLPage(lv_obj_t* const parent)
     :   LVGLBase(lv_page_create(parent, NULL)) {
 
-    LVGL_DBG_PRINT("LVGLPage #2 constructor ");
     lv_page_set_scrollbar_mode(_obj, LV_SCROLLBAR_MODE_OFF);
     lv_obj_set_auto_realign(_obj, true);
     lv_obj_align_origo(_obj, NULL, LV_ALIGN_CENTER, 0, 0);
@@ -20,7 +18,6 @@ LVGLPage::LVGLPage(lv_obj_t* const parent)
 
 LVGLPage::LVGLPage(lv_obj_t* const src, LVGLBase* const parent)
     :   LVGLBase(src, parent) {
-    LVGL_DBG_PRINT("LVGLPage #3 constructor ");
     applyTheme();
     // lv_obj_set_auto_realign(_obj, true);
 

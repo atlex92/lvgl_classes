@@ -3,21 +3,18 @@
 LVGLButton::LVGLButton(const std::string& txt, lv_obj_t* const parent)
     :   LVGLBase(lv_btn_create(parent, NULL), parent),
         _lbl{new LVGLLabel(txt, this)} {
-    LVGL_DBG_PRINT("LVGLButton #1 constructor");
     applyTheme();
 }
 
 LVGLButton::LVGLButton(const std::string& txt, LVGLBase* const parent)
     :   LVGLBase(lv_btn_create(parent? parent->innerData() : lv_disp_get_scr_act(NULL), NULL), parent),
         _lbl{new LVGLLabel(txt, this)} {
-    LVGL_DBG_PRINT("LVGLButton #2 constructor");
     applyTheme();
 }
 
 LVGLButton::LVGLButton(lv_obj_t* const src, LVGLBase* const parent)
     :   LVGLBase(src, parent),
         _lbl{new LVGLLabel("", this)} {
-    LVGL_DBG_PRINT("LVGLButton #3 constructor");
     applyTheme();
 }
 

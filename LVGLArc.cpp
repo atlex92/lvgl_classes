@@ -9,7 +9,6 @@ LVGLArc::LVGLArc(const bool adjustable, const size_t startAngle,
         _startAngle(startAngle),
         _endAngle(endAngle) {
 
-    LVGL_DBG_PRINT("LVGLArc #1 constructor");
     init();
     applyTheme();
 }
@@ -23,7 +22,6 @@ LVGLArc::LVGLArc(const bool adjustable, const size_t startAngle,
         _startAngle(startAngle),
         _endAngle(endAngle) {
 
-    LVGL_DBG_PRINT("LVGLArc #2 constructor");
     init();
     applyTheme();
 }

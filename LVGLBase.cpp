@@ -11,7 +11,6 @@ void LVGLBase::setTheme(AbstractTheme* const theme) {
 
 void LVGLBase::eventHandler(lv_obj_t * obj, lv_event_t event) {
 
-    // LVGL_DBG_PRINT("Event handler");
     LVGLBase* base = (LVGLBase*)lv_obj_get_user_data(obj);
 
     if (!base) {
@@ -31,7 +30,6 @@ LVGLBase::LVGLBase(lv_obj_t* const lvglObj, LVGLBase* const parent)
         _obj{lvglObj},
         _eventCallback{nullptr} {
     
-    LVGL_DBG_PRINT("LVGLBase #1 constructor");
     lv_obj_set_user_data(_obj, this);
     lv_obj_set_event_cb(_obj, eventHandler);
 }
@@ -41,7 +39,6 @@ LVGLBase::LVGLBase(lv_obj_t* const lvglObj, lv_obj_t* const parent)
         _obj{lvglObj},
         _eventCallback{nullptr} {
 
-    LVGL_DBG_PRINT("LVGLBase #2 constructor");
     lv_obj_set_user_data(_obj, this);
     lv_obj_set_event_cb(_obj, eventHandler);
 }
@@ -53,8 +50,6 @@ void LVGLBase::hide() {
 void LVGLBase::applyTheme() {
 
     if (_theme) {
-        LVGL_DBG_PRINT("applying theme for object");
-        // LVGL_DBG_PRINT((size_t)type());
         switch (type()) {
             case eLvglType::LVGL_CLASS_BUTTON:
                 resetStyle(LV_BTN_PART_MAIN);
@@ -62,18 +57,6 @@ void LVGLBase::applyTheme() {
                 setStyle(LV_BTN_PART_MAIN, _theme->commonBorderStyle());
                 setStyle(LV_BTN_PART_MAIN, _theme->commonOutlineStyle());
                 setStyle(LV_BTN_PART_MAIN, _theme->commonShapeStyle());
-
-                // lv_obj_set_style_local_line_dash_gap(_obj, LV_BTN_PART_MAIN, LV_STATE_PRESSED, 5);
-                // lv_obj_set_style_local_line_dash_width(_obj, LV_BTN_PART_MAIN, LV_STATE_PRESSED, 5);
-                // lv_obj_set_style_local_
-                // lv_obj_set_style_local_(_obj, LV_BTN_PART_MAIN, LV_STATE_PRESSED, 1);
-
-
-
-
-
-
-
             break;
 
             case eLvglType::LVGL_CLASS_PAGE:

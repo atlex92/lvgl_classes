@@ -3,7 +3,6 @@
 LVGLSlider::LVGLSlider(const int minValue, const int maxValue, const size_t step, LVGLBase* const parent) 
     :   AbstractRangeValueContainer(minValue, maxValue, step),
         LVGLBase(lv_slider_create(parent ? parent->innerData() : lv_disp_get_scr_act(NULL), NULL), parent) {
-    LVGL_DBG_PRINT("LVGLSlider #1 constructor");
 
     init();
     applyTheme();
@@ -12,7 +11,6 @@ LVGLSlider::LVGLSlider(const int minValue, const int maxValue, const size_t step
 LVGLSlider::LVGLSlider(const int minValue, const int maxValue, const size_t step, lv_obj_t* const parent)
     :   AbstractRangeValueContainer(minValue, maxValue, step),
         LVGLBase(lv_slider_create(parent, NULL), parent) {
-    LVGL_DBG_PRINT("LVGLSlider #2 constructor");
 
     init();
     applyTheme();

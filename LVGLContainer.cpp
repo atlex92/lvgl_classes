@@ -3,17 +3,14 @@
 LVGLContainer::LVGLContainer(LVGLBase* const parent)
     :   LVGLBase(lv_cont_create(parent? parent->innerData() : lv_disp_get_scr_act(NULL), NULL)) {
 
-    LVGL_DBG_PRINT("LVGLContainer #1 constructor");
 }
 
 LVGLContainer::LVGLContainer(lv_obj_t* const parent)
     :   LVGLBase(lv_cont_create(parent, NULL)) {
-    LVGL_DBG_PRINT("LVGLContainer #2 constructor");
 }
 
 LVGLContainer::LVGLContainer(lv_obj_t* const src, LVGLBase* const parent)
     :   LVGLBase(src, parent) {
-    LVGL_DBG_PRINT("LVGLContainer #3 constructor");
 }
 
 void LVGLContainer::addObject(LVGLBase* const obj) {

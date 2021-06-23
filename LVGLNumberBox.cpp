@@ -7,7 +7,6 @@ LVGLNumberBox::LVGLNumberBox(const int minValue, const int maxValue, const size_
         _valueLbl{new LVGLLabel("", this)},
         _rightBtn{new LVGLButton("+", this)},
         _label{label} {
-    LVGL_DBG_PRINT("LVGLNumberBox #1 constructor");
     init();
 }
 
@@ -18,7 +17,6 @@ LVGLNumberBox::LVGLNumberBox(const int minValue, const int maxValue, const size_
         _valueLbl{new LVGLLabel("", this)},
         _rightBtn{new LVGLButton("+", this)},
         _label{label} {
-    LVGL_DBG_PRINT("LVGLNumberBox #2 constructor");
     init();
 }
 

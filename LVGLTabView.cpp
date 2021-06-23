@@ -4,13 +4,11 @@ LVGLTabView::LVGLTabView(LVGLBase* const parent)
     :   LVGLBase(lv_tabview_create(parent? parent->innerData() : lv_disp_get_scr_act(NULL), NULL),
         parent) {
 
-    LVGL_DBG_PRINT("LVGLTabView #1 constructor ");
     applyTheme();
 }
 
 LVGLTabView::LVGLTabView(lv_obj_t* const parent)
     :   LVGLBase(lv_tabview_create(parent, NULL)) {
-    LVGL_DBG_PRINT("LVGLTabView #2 constructor ");
     applyTheme();
 }
 

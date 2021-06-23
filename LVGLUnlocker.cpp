@@ -4,7 +4,6 @@
 
 LVGLUnlocker::LVGLUnlocker(LVGLBase* const parent) 
     :   LVGLSlider(0, 100, 1, parent) {
-    LVGL_DBG_PRINT("LVGLUnlocker #1 constructor");
 
     init();
     // applyTheme();
@@ -12,7 +11,6 @@ LVGLUnlocker::LVGLUnlocker(LVGLBase* const parent)
 
 LVGLUnlocker::LVGLUnlocker(lv_obj_t* const parent)
     :   LVGLSlider(0, 100, 1, parent) {
-    LVGL_DBG_PRINT("LVGLUnlocker #2 constructor");
 
     init();
     applyTheme();
