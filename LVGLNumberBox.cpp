@@ -23,9 +23,9 @@ LVGLNumberBox::LVGLNumberBox(const int minValue, const int maxValue, const size_
 void LVGLNumberBox::init() {
     
     setValue(minValue());
-    _leftBtn->setSize(30,30);
-    _rightBtn->setSize(30,30);
-    _valueLbl->setSize(90, 40);
+    // _leftBtn->setSize(30,30);
+    // _rightBtn->setSize(30,30);
+    // _valueLbl->setSize(90, 40);
     
     _valueLbl->setAlignMode(LV_LABEL_ALIGN_CENTER);
 
@@ -85,5 +85,13 @@ void LVGLNumberBox::setButtonsStyle(const uint8_t part, lv_style_t* const style)
 
 void LVGLNumberBox::setLabelStyle(const uint8_t part, lv_style_t* const style) {
     _valueLbl->setStyle(part, style);
+}
+
+void LVGLNumberBox::setSize(const size_t w, const size_t h) {
+
+    const size_t btnSize {h};
+    _leftBtn->setSize(btnSize, btnSize);
+    _rightBtn->setSize(btnSize, btnSize);
+    _valueLbl->setSize(w - btnSize * 2.5 , h);
 }
 

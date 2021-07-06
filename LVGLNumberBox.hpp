@@ -13,6 +13,7 @@ class LVGLNumberBox : public AbstractRangeValueContainer<int>, public LVGLRow {
         explicit LVGLNumberBox(const int minValue, const int maxValue, const size_t step, const std::string& label, lv_obj_t* const parent);
         void setButtonsStyle(const uint8_t part, lv_style_t* const style);
         void setLabelStyle(const uint8_t part, lv_style_t* const style);
+        void setSize(const size_t w, const size_t h) override;
     private:
         void redrawText();
         void init();
