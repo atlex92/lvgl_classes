@@ -1,18 +1,32 @@
-// #pragma once
-// #include "LVGLBase.hpp"
-// #include "AbstractValueChangable.hpp"
+#pragma once
+#include "LVGLLabel.hpp"
+#include "AbstractValueChangable.hpp"
 
-// enum class eBatteryState {
-//     BATTERY_EMPTY,
-//     BATTERY_25,
-//     BATTERY_50,
-//     BATTERY_75,
-//     BATTERY_FULL
-// };
+enum class eBatteryState {
+    BATTERY_EMPTY,
+    BATTERY_25,
+    BATTERY_50,
+    BATTERY_75,
+    BATTERY_FULL
+};
 
-// class LVGLBatteryIndicator : public AbstractValueChangable<eBatteryState>, public LVGLBase {
-//     public:
-//         eLvglType type() const override {return eLvglType::LVGL_CLASS_BATTERY_IND;}
-//         explicit LVGLBatteryIndicator(LVGLBase* const parent = NULL);
-//         // void setSize(const size_t w, const size_t h) override;
-// };
+enum class eBatteryIndicatorSize {
+    BATTERY_SIZE_SMALL,
+    BATTERY_SIZE_MEDIUM,
+    BATTERY_SIZE_LARGE,
+    BATTERY_SIZE_HUGE,
+};
+
+class LVGLBatteryIndicator : public AbstractValueChangable<uint8_t>, public LVGLLabel {
+    public:
+        eLvglType type() const override {return eLvglType::LVGL_CLASS_BATTERY_IND;}
+        explicit LVGLBatteryIndicator(const eBatteryIndicatorSize size, const lv_color_t color, LVGLBase* const parent = NULL);
+    private:
+        void setChargeLevel(const uint8_t value);
+    private:
+        lv_obj_t* _canvas = nullptr;
+        lv_color_t* _colorBuff = nullptr;
+        size_t _canvasWidth;
+        size_t _canvasHeight;
+        lv_color_t _color;
+};
