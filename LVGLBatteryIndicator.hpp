@@ -23,6 +23,7 @@ class LVGLBatteryIndicator : public AbstractValueChangable<uint8_t>, public LVGL
         explicit LVGLBatteryIndicator(const eBatteryIndicatorSize size, const lv_color_t color, LVGLBase* const parent = NULL);
     private:
         void setChargeLevel(const uint8_t value);
+        eBatteryState stateByValue(const uint8_t value) const;
     private:
         lv_obj_t* _canvas = nullptr;
         lv_color_t* _colorBuff = nullptr;

@@ -29,29 +29,6 @@ LVGLArc::LVGLArc(const bool adjustable, const size_t startAngle,
 static void arcAnimCb(void * ptr, lv_anim_value_t val)
 {
     lv_obj_t* arc     = static_cast<lv_obj_t*>(ptr);
-
-    // lv_spinner_ext_t * ext = lv_obj_get_ext_attr(arc);
-
-    // const int currValue{lv_arc_get_value(arc)};
-    // const int startAnngle {150/*(lv_arc_get_angle_end(arc) - lv_arc_get_angle_start(arc)) * currValue/100*/};
-    // const int endAnngle {280/*(lv_arc_get_angle_end(arc) - lv_arc_get_angle_start(arc)) * val/100*/};
-
-
-    // lv_arc_ext_t * ext = ( lv_arc_ext_t *)lv_obj_get_ext_attr(arc);
-    // const uint16_t angleStart {ext->arc_angle_start};
-    // const float delta {((int)ext->bg_angle_end - angleStart) * (float)val / 100};
-    // LVGL_DBG_PRINT(delta);
-
-    // const uint16_t angleEnd = angleStart + delta;
-
-    // LVGL_DBG_PRINT(angleStart);
-    // LVGL_DBG_PRINT(angleEnd);
-    // LVGL_DBG_PRINT(val);
-
-    // LVGL_DBG_PRINT("");
-
-
-    // lv_arc_set_angles(arc, angleStart, angleEnd);
     lv_arc_set_value(arc, val);
 }
 
@@ -70,8 +47,6 @@ void LVGLArc::init() {
             case LV_EVENT_RELEASED:
                 this->setValue(lv_arc_get_value(this->_obj));
                 LVGL_DBG_PRINT("LVGLArc : LV_EVENT_RELEASED");
-                // LVGL_DBG_PRINT(value());
-
             break;
             default:
                 break;
@@ -82,8 +57,6 @@ void LVGLArc::init() {
         redrawText();
         if (lv_arc_get_value(this->_obj) != this->value()) {
             
-            // LVGL_DBG_PRINT("LVGLArc : setted!");
-
             static lv_anim_path_t path;
             lv_anim_path_init(&path);
             lv_anim_path_set_cb(&path, lv_anim_path_linear);
@@ -96,8 +69,6 @@ void LVGLArc::init() {
             lv_anim_set_path(&a, &path);
             lv_anim_set_repeat_count(&a, 1);
             lv_anim_set_values(&a, lv_arc_get_value(this->_obj), this->value());
-            // lv_arc_set_value(_obj, this->value());
-            // lv_arc_set_angles();
             lv_anim_start(&a);
         }
     };

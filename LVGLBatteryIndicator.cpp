@@ -73,12 +73,57 @@ LVGLBatteryIndicator::LVGLBatteryIndicator(const eBatteryIndicatorSize size, con
 
 void LVGLBatteryIndicator::setChargeLevel(const uint8_t value) {
 
+    const eBatteryState state {stateByValue(value)};
+
+
     lv_draw_rect_dsc_t rect_dsc;
     lv_draw_rect_dsc_init(&rect_dsc);
     rect_dsc.bg_opa = LV_OPA_COVER;
-    rect_dsc.bg_color = _color;
+
+    switch (state) {
+        case eBatteryState::BATTERY_EMPTY:
+            rect_dsc.bg_color = LV_COLOR_RED;
+        break;
+        case eBatteryState::BATTERY_25:
+            rect_dsc.bg_color = LV_COLOR_ORANGE;
+        break;
+        case eBatteryState::BATTERY_50:
+            rect_dsc.bg_color = LV_COLOR_YELLOW;
+        break;
+        case eBatteryState::BATTERY_75:
+        case eBatteryState::BATTERY_FULL:
+            rect_dsc.bg_color = LV_COLOR_LIME;
+        break;
+    
+        default:
+        break;
+    }
 
     lv_canvas_fill_bg(_canvas, LV_COLOR_BLACK, LV_OPA_COVER);
 
     lv_canvas_draw_rect(_canvas, 0, 0, _canvasWidth / 100.0 * value, _canvasHeight, &rect_dsc);
+}
+
+eBatteryState LVGLBatteryIndicator::stateByValue(const uint8_t value) const {
+
+    static const uint8_t valueEmpty{12};
+    static const uint8_t value25{37};
+    static const uint8_t value50{62};
+    static const uint8_t value75{87};
+
+    if (value < valueEmpty) {
+        return eBatteryState::BATTERY_EMPTY;
+    }
+    if (value < value25) {
+        return eBatteryState::BATTERY_25;
+    }
+    if (value < value50) {
+        return eBatteryState::BATTERY_50;
+    }
+    if (value < value75) {
+        return eBatteryState::BATTERY_75;
+    }
+
+    return eBatteryState::BATTERY_FULL;
+    
 }
