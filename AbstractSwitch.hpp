@@ -7,7 +7,7 @@ class AbstractSwitch : public AbstractValueChangable<bool>{
     public:
         virtual ~AbstractSwitch() = default;
         
-        void toogle() {
+        void toggle() {
             setValue(!_value);
         }
     private:

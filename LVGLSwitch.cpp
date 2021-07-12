@@ -23,7 +23,7 @@ void LVGLSwitch::init() {
     lv_switch_set_anim_time(_obj, _animTime);
     auto clickCb = [this](const lv_event_t event) {
         if(LV_EVENT_CLICKED == event) {
-            toogle();
+            toggle();
         }
     };
 

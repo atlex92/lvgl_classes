@@ -3,8 +3,8 @@
 #include "AbstractRangeValueContainer.hpp"
 #include "LVGLBase.hpp"
 
-class LVGLSlider : public AbstractRangeValueContainer<int>, public LVGLBase {
 
+class LVGLSlider : public AbstractRangeValueContainer<int>, public LVGLBase {
     public:
         eLvglType type() const override {return eLvglType::LVGL_CLASS_SLIDER;}
         explicit LVGLSlider(const int minValue, const int maxValue, const size_t step, LVGLBase* const parent);
