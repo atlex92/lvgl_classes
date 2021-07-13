@@ -20,6 +20,32 @@ class AbstractRangeValueContainer : public AbstractValueChangable<ValueType> {
         // int value() const { return _currentValue; }
         // setters
         // void setValue(const int value);
+        void setValue(const ValueType value) override {
+            if (value > _maxValue) {
+                this->_value = _maxValue;
+                return;
+            }
+
+            if (value < _minValue) {
+                this->_value = _minValue;
+                return;
+            }
+
+            const int remainder{(value - _minValue)%_step};
+
+            if (remainder) {
+                if (remainder >= _step/2.0) {
+                    this->_value = value + _step - remainder;
+                }
+                else {
+                    this->_value = value - remainder;
+                }
+            }
+            else {
+                this->_value = value;
+            }
+        }
+
         void setRange(const ValueType min, const ValueType max) {
             _minValue = min;
             _maxValue = max;
@@ -39,7 +65,6 @@ class AbstractRangeValueContainer : public AbstractValueChangable<ValueType> {
             if (this->_value > _maxValue){
                 this->_value = _maxValue;
             }
-            this->emitChangedSignal();
         }
 
         void decrement() {
@@ -47,7 +72,6 @@ class AbstractRangeValueContainer : public AbstractValueChangable<ValueType> {
             if (this->_value < _minValue){
                 this->_value = _minValue;
             }
-            this->emitChangedSignal();
         }
 
         AbstractRangeValueContainer& operator++() {
@@ -59,18 +83,10 @@ class AbstractRangeValueContainer : public AbstractValueChangable<ValueType> {
             decrement();
             return *this;
         }
-
-        // void onValueChanged(valueChangedCallback_t cb);
-
     protected:
-        // void setInnerValueChangedCallback(valueChangedCallback_t cb);
     private:
-        // valueChangedCallback_t _innerValueChangedCallback;
-        // valueChangedCallback_t _extValueChangedCallback;
-        // void emitChangedSignal();
+
         ValueType _minValue;
         ValueType _maxValue;
         ValueType _step;
-        // int _currentValue;
-        // int _prevValue;
 };

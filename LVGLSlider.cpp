@@ -26,22 +26,38 @@ void LVGLSlider::init() {
     auto eventCb = [this](const lv_event_t event) {
         switch (event) {
             case LV_EVENT_RELEASED:
-                this->setValue(lv_slider_get_value(this->_obj));
+                moved(lv_slider_get_value(this->_obj));
                 LVGL_DBG_PRINT("LV_EVENT_RELEASED");
             break;
             default:
                 break;
         }
     };
-
-    auto onChangedCb = [this](AbstractValueChangable<int>*) {
-        if (lv_slider_get_value(this->_obj) != this->value()) {
-            lv_slider_set_value(_obj, this->value(), 100);
-            LVGL_DBG_PRINT("setted!");
-        }
-    };
-
-
     setEventCallBack(eventCb);
-    setInnerValueChangedCallback(onChangedCb);
+}
+
+void LVGLSlider::moved(const int value) {
+    setValue(value);
+    if (_onMovedCb) {
+        _onMovedCb(value);
+    }
+}
+
+void LVGLSlider::changed() {
+    if (lv_slider_get_value(this->_obj) != this->value()) {
+        lv_slider_set_value(_obj, this->value(), 100);
+        LVGL_DBG_PRINT("setted!");
+    }
+    if (_onChangedCb) {
+        _onChangedCb(this);
+    }
+}
+
+void LVGLSlider::onMoved(onMovedCallbackType cb) {
+    _onMovedCb = cb;
+}
+
+void LVGLSlider::setValue(const int value) {
+    AbstractRangeValueContainer<int>::setValue(value);
+    changed();
 }

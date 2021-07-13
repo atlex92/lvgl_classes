@@ -59,12 +59,6 @@ LVGLBatteryIndicator::LVGLBatteryIndicator(const eBatteryIndicatorSize size, con
 
     lv_obj_align(_canvas, _obj,LV_ALIGN_CENTER, -CANVAS_SHIFT(_canvasWidth), 0);
 
-    auto onChangedCb = [this](AbstractValueChangable<uint8_t>* obj) {
-        setChargeLevel(obj->value());
-    };
-
-    setInnerValueChangedCallback(onChangedCb);
-
     applyTheme();
 
     setChargeLevel(0);
@@ -124,6 +118,18 @@ eBatteryState LVGLBatteryIndicator::stateByValue(const uint8_t value) const {
         return eBatteryState::BATTERY_75;
     }
 
-    return eBatteryState::BATTERY_FULL;
-    
+    return eBatteryState::BATTERY_FULL;   
+}
+
+void LVGLBatteryIndicator::setValue(const uint8_t value) {
+    AbstractValueChangable<uint8_t>::setValue(value);
+    changed();
+}
+
+void LVGLBatteryIndicator::changed() {
+
+    setChargeLevel(value());
+    if (_onChangedCb) {
+        _onChangedCb(this);
+    }
 }

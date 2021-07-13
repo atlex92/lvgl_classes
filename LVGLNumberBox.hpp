@@ -17,6 +17,7 @@ class LVGLNumberBox : public AbstractRangeValueContainer<int>, public LVGLRow {
     private:
         void redrawText();
         void init();
+        void changed() override;
 
         LVGLButton* _leftBtn;
         LVGLLabel* _valueLbl;

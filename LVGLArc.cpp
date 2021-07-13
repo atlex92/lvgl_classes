@@ -52,31 +52,37 @@ void LVGLArc::init() {
                 break;
         }
     };
-
-    auto onChangedCb = [this](AbstractValueChangable<int>*) {
-        redrawText();
-        if (lv_arc_get_value(this->_obj) != this->value()) {
-            
-            static lv_anim_path_t path;
-            lv_anim_path_init(&path);
-            lv_anim_path_set_cb(&path, lv_anim_path_linear);
-
-            lv_anim_t a;
-            lv_anim_init(&a);
-            lv_anim_set_var(&a, _obj);
-            lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)arcAnimCb);
-            lv_anim_set_time(&a, 500);
-            lv_anim_set_path(&a, &path);
-            lv_anim_set_repeat_count(&a, 1);
-            lv_anim_set_values(&a, lv_arc_get_value(this->_obj), this->value());
-            lv_anim_start(&a);
-        }
-    };
-
     setEventCallBack(eventCb);
-    setInnerValueChangedCallback(onChangedCb);
 }
 
 void LVGLArc::redrawText() {
     _valueLbl->setText("%d %s", value(), _valueString.c_str());
+}
+
+void LVGLArc::setValue(const int value) {
+    AbstractValueChangable<int>::setValue(value);
+    changed();
+}
+
+void LVGLArc::changed() {
+    redrawText();
+    if (lv_arc_get_value(this->_obj) != this->value()) {
+        
+        static lv_anim_path_t path;
+        lv_anim_path_init(&path);
+        lv_anim_path_set_cb(&path, lv_anim_path_linear);
+
+        lv_anim_t a;
+        lv_anim_init(&a);
+        lv_anim_set_var(&a, _obj);
+        lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)arcAnimCb);
+        lv_anim_set_time(&a, 500);
+        lv_anim_set_path(&a, &path);
+        lv_anim_set_repeat_count(&a, 1);
+        lv_anim_set_values(&a, lv_arc_get_value(this->_obj), this->value());
+        lv_anim_start(&a);
+    }
+    if (_onChangedCb) {
+        _onChangedCb(this);
+    }
 }

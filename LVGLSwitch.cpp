@@ -17,17 +17,27 @@ LVGLSwitch::LVGLSwitch(const size_t animTime, lv_obj_t* const parent)
 }
 
 void LVGLSwitch::init() {
-    auto onChangedCb = [this](AbstractValueChangable* obj) {
-        this->value() ? lv_switch_on(this->_obj, _animTime) : lv_switch_off(this->_obj, _animTime);
-    };
+
     lv_switch_set_anim_time(_obj, _animTime);
     auto clickCb = [this](const lv_event_t event) {
         if(LV_EVENT_CLICKED == event) {
-            toggle();
+            toggled();
         }
     };
 
     setEventCallBack(clickCb);
+}
 
-    setInnerValueChangedCallback(onChangedCb);
+void LVGLSwitch::setValue(const bool value) {
+    AbstractValueChangable<bool>::setValue(value);
+    changed();
+}
+
+void LVGLSwitch::changed() {
+
+    this->value() ? lv_switch_on(this->_obj, _animTime) : lv_switch_off(this->_obj, _animTime);
+
+    if (_onChangedCb) {
+        _onChangedCb(this);
+    }
 }

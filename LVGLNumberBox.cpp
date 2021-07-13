@@ -38,6 +38,7 @@ void LVGLNumberBox::init() {
             case LV_EVENT_CLICKED:
             case LV_EVENT_LONG_PRESSED_REPEAT:
                 decrement();
+                changed();
             break;
 
             default:
@@ -50,6 +51,7 @@ void LVGLNumberBox::init() {
             case LV_EVENT_CLICKED:
             case LV_EVENT_LONG_PRESSED_REPEAT:
                 increment();
+                changed();
             break;
 
             default:
@@ -57,21 +59,8 @@ void LVGLNumberBox::init() {
         }
     };
 
-    auto onChangedCb = [this](AbstractValueChangable<int>*) {
-        redrawText();
-
-        this->value() == this->minValue() ?
-            this->_leftBtn->disable() :
-            this->_leftBtn->enable();
-
-        this->value() == this->maxValue() ?
-            this->_rightBtn->disable() :
-            this->_rightBtn->enable();
-    };
-
     _leftBtn->setEventCallBack(minusCb);
     _rightBtn->setEventCallBack(plusCb);
-    setInnerValueChangedCallback(onChangedCb);
 }
 
 void LVGLNumberBox::redrawText() {
@@ -93,5 +82,21 @@ void LVGLNumberBox::setSize(const size_t w, const size_t h) {
     _leftBtn->setSize(btnSize, btnSize);
     _rightBtn->setSize(btnSize, btnSize);
     _valueLbl->setSize(w - btnSize * 2.5 , h);
+}
+
+void LVGLNumberBox::changed() {
+    redrawText();
+
+    this->value() == this->minValue() ?
+        this->_leftBtn->disable() :
+        this->_leftBtn->enable();
+
+    this->value() == this->maxValue() ?
+        this->_rightBtn->disable() :
+        this->_rightBtn->enable();
+
+    if (_onChangedCb) {
+        _onChangedCb(this);
+    }
 }
 

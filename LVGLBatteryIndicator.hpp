@@ -21,9 +21,11 @@ class LVGLBatteryIndicator : public AbstractValueChangable<uint8_t>, public LVGL
     public:
         eLvglType type() const override {return eLvglType::LVGL_CLASS_BATTERY_IND;}
         explicit LVGLBatteryIndicator(const eBatteryIndicatorSize size, const lv_color_t color, LVGLBase* const parent = NULL);
+        void setValue(const uint8_t value) override;
     private:
-        void setChargeLevel(const uint8_t value);
         eBatteryState stateByValue(const uint8_t value) const;
+        void setChargeLevel(const uint8_t value);
+        void changed() override;
     private:
         lv_obj_t* _canvas = nullptr;
         lv_color_t* _colorBuff = nullptr;
