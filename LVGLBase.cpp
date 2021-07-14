@@ -223,6 +223,9 @@ void LVGLBase::setAutoRealign(const bool value) {
     lv_obj_set_auto_realign(_obj, value);
 }
 
+uint8_t LVGLBase::state() const {
+    return lv_obj_get_state(_obj, LV_OBJ_PART_MAIN);
+}
 
 LVGLBase::~LVGLBase() {
     LVGL_DBG_PRINT("LVGLBase destructor");

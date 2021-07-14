@@ -5,7 +5,7 @@
 class AbstractSwitch : public AbstractValueChangable<bool>{
 
     public:
-        typedef std::function<void(const int)> onToggleCbType;
+        typedef std::function<void(const bool)> onToggleCbType;
         virtual ~AbstractSwitch() = default;
         void onToggled(onToggleCbType cb) {
             _onToggleCb = cb;

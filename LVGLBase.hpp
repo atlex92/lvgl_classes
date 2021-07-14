@@ -32,6 +32,7 @@ class LVGLBase {
         
         void setAutoRealign(const bool value);
         void setState(const lv_state_t state);
+        uint8_t state() const;
         // style API
         void setStyle(const uint8_t part, lv_style_t* const style);
         void setStyle(const uint8_t part, LVGLStyle& style);
