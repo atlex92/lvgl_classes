@@ -23,10 +23,7 @@ LVGLNumberBox::LVGLNumberBox(const int minValue, const int maxValue, const size_
 void LVGLNumberBox::init() {
     
     setValue(minValue());
-    // _leftBtn->setSize(30,30);
-    // _rightBtn->setSize(30,30);
-    // _valueLbl->setSize(90, 40);
-    
+   
     _valueLbl->setAlignMode(LV_LABEL_ALIGN_CENTER);
 
     this->_valueLbl->setText("%d %s", this->value(), _label.c_str());
@@ -98,5 +95,10 @@ void LVGLNumberBox::changed() {
     if (_onChangedCb) {
         _onChangedCb(this);
     }
+}
+
+void LVGLNumberBox::setValue(const int value) {
+    AbstractRangeValueContainer<int>::setValue(value);
+    changed();
 }
 

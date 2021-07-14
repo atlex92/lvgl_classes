@@ -14,6 +14,7 @@ class LVGLNumberBox : public AbstractRangeValueContainer<int>, public LVGLRow {
         void setButtonsStyle(const uint8_t part, lv_style_t* const style);
         void setLabelStyle(const uint8_t part, lv_style_t* const style);
         void setSize(const size_t w, const size_t h) override;
+        void setValue(const int value) override;
     private:
         void redrawText();
         void init();
