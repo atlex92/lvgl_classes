@@ -46,6 +46,8 @@ class LVGLBase {
         void setStyleLineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         // paddings
         void setPaddings(const lv_part_style_t part, const lv_state_t state, const int hor, const int ver);
+        void setPaddings(const lv_part_style_t part, const lv_state_t state, const int up,
+            const int bottom, const int left, const int right);
         void setInnerPadding(const lv_part_style_t part,const lv_state_t state, const int value);
         // fonts
         void setFont(const lv_part_style_t part,const lv_state_t state, lv_font_t* const font);

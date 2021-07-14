@@ -139,6 +139,14 @@ void LVGLBase::setPaddings(const lv_part_style_t part,const lv_state_t state, co
     lv_obj_set_style_local_pad_ver(_obj, part, state, ver);
 }
 
+void LVGLBase::setPaddings(const lv_part_style_t part, const lv_state_t state, const int up,
+            const int bottom, const int left, const int right) {
+    lv_obj_set_style_local_pad_top(_obj, part, state, up);
+    lv_obj_set_style_local_pad_bottom(_obj, part, state, bottom);
+    lv_obj_set_style_local_pad_left(_obj, part, state, left);
+    lv_obj_set_style_local_pad_right(_obj, part, state, right);
+}
+
 void LVGLBase::setInnerPadding(const lv_part_style_t part,const lv_state_t state, const int value) {
     lv_obj_set_style_local_pad_inner(_obj, part, state, value);
 }
