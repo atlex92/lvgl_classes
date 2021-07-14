@@ -35,11 +35,6 @@ void LVGLSwitch::setValue(const bool value) {
 
 void LVGLSwitch::changed() {
 
-    if (LV_STATE_DEFAULT == state()) {
-        LVGL_DBG_PRINT("disabled state!!!\r\n");
-        return;
-    }
-
     this->value() ? lv_switch_on(this->_obj, _animTime) : lv_switch_off(this->_obj, _animTime);
 
     if (_onChangedCb) {
