@@ -30,34 +30,21 @@ void LVGLNumberBox::init() {
 
     _leftBtn->disable();
 
-    auto minusCb = [this](const lv_event_t event) {
-        switch (event) {
-            case LV_EVENT_CLICKED:
-            case LV_EVENT_LONG_PRESSED_REPEAT:
-                decrement();
-                changed();
-            break;
-
-            default:
-                break;
-        }
+    auto minusCb = [this](const LVGLButton* lv_btn_create) {
+        decrement();
+        changed();
     };
 
-    auto plusCb = [this](const lv_event_t event) {
-        switch (event) {
-            case LV_EVENT_CLICKED:
-            case LV_EVENT_LONG_PRESSED_REPEAT:
-                increment();
-                changed();
-            break;
-
-            default:
-                break;
-        }
+    auto plusCb = [this](const LVGLButton* lv_btn_create) {
+        increment();
+        changed();
     };
 
-    _leftBtn->setEventCallBack(minusCb);
-    _rightBtn->setEventCallBack(plusCb);
+    _leftBtn->onClicked(minusCb);
+    _leftBtn->onLongPressedRepeat(minusCb);
+
+    _rightBtn->onClicked(plusCb);
+    _rightBtn->onLongPressedRepeat(plusCb);
 }
 
 void LVGLNumberBox::redrawText() {

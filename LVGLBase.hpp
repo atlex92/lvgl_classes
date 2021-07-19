@@ -39,7 +39,7 @@ class LVGLBase {
         void resetStyle(const uint8_t part);
         // void setStyleTextFont(const lv_part_style_t part, const lv_state_t state, const lv_font_t* font);
         // style color
-        void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+        virtual void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
