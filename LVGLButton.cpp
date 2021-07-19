@@ -21,6 +21,10 @@ LVGLButton::LVGLButton(lv_obj_t* const src, LVGLBase* const parent)
     init();
 }
 
+void LVGLButton::setLabelText(const std::string& txt) {
+    _lbl->setText(txt);
+}
+
 void LVGLButton::setSize(const size_t w, const size_t h) {
     LVGLBase::setSize(w, h);
     _lbl->setSize(width(), _lbl->height());
