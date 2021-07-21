@@ -19,6 +19,7 @@ enum class eLvglType {
     LVGL_CLASS_ARC,
     LVGL_CLASS_BATTERY_IND,
     LVGL_CLASS_BATTERY_MAGE,
+    LVGL_CLASS_SPINNER,
     LVGL_CLASS_MAX   
 };
 class LVGLBase {
@@ -41,9 +42,11 @@ class LVGLBase {
         // style color
         virtual void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+        void setStyleBgOpacity(const lv_part_style_t part, const lv_state_t state, const lv_opa_t opa);
         void setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleLineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+
         // paddings
         void setPaddings(const lv_part_style_t part, const lv_state_t state, const int hor, const int ver);
         void setPaddings(const lv_part_style_t part, const lv_state_t state, const int up,

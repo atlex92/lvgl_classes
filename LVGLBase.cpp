@@ -127,6 +127,15 @@ void LVGLBase::applyTheme() {
                 resetStyle(LV_LABEL_PART_MAIN);
                 setStyle(LV_LABEL_PART_MAIN, _theme->commonTextStyle());          
             break;
+
+            case eLvglType::LVGL_CLASS_SPINNER:
+                resetStyle(LV_SPINNER_PART_BG);
+                resetStyle(LV_SPINNER_PART_INDIC);
+                setStyle(LV_SPINNER_PART_BG, _theme->commonShapeStyle());   
+                setStyle(LV_SPINNER_PART_BG, _theme->commonBgStyle());
+                setStyle(LV_SPINNER_PART_INDIC, _theme->indicatorStyle());
+            break;
+
             default:
             break;
         }
@@ -184,12 +193,8 @@ void LVGLBase::setClickable(const bool value) {
 }
 
 void LVGLBase::align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs) {
-    lv_obj_align(_obj, ref->innerData() ? ref->innerData() : NULL, align, x_ofs, y_ofs);
+    lv_obj_align(_obj, (ref and ref->innerData()) ? ref->innerData() : NULL, align, x_ofs, y_ofs);
 }
-
-// void LVGLBase::setStyleTextFont(const lv_part_style_t part, const lv_state_t state, const lv_font_t* font) {
-//     lv_obj_set_style_local_text_font(_obj, part, state, font);
-// }
 
 void LVGLBase::setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
     lv_obj_set_style_local_text_color(_obj, part, state, color);
@@ -201,6 +206,10 @@ void LVGLBase::setStyleLineColor(const lv_part_style_t part, const lv_state_t st
 
 void LVGLBase::setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
     lv_obj_set_style_local_bg_color(_obj, part, state, color);
+}
+
+void LVGLBase::setStyleBgOpacity(const lv_part_style_t part, const lv_state_t state, const lv_opa_t opa) {
+    lv_obj_set_style_local_bg_opa(_obj, part, state, opa);
 }
 
 void LVGLBase::setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {

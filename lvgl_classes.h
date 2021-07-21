@@ -12,3 +12,4 @@
 #include "LVGLArc.hpp"
 #include "LVGLBatteryIndicator.hpp"
 #include "LVGLImage.hpp"
+#include "LVGLSpinner.hpp"
