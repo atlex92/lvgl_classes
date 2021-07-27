@@ -30,12 +30,12 @@ void LVGLNumberBox::init() {
 
     _leftBtn->disable();
 
-    auto minusCb = [this](const LVGLButton* lv_btn_create) {
+    auto minusCb = [this](const LVGLButton* btn) {
         decrement();
         changed();
     };
 
-    auto plusCb = [this](const LVGLButton* lv_btn_create) {
+    auto plusCb = [this](const LVGLButton* btn) {
         increment();
         changed();
     };
