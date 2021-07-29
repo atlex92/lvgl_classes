@@ -32,6 +32,37 @@ LVGLBase::LVGLBase(lv_obj_t* const lvglObj, LVGLBase* const parent)
     
     lv_obj_set_user_data(_obj, this);
     lv_obj_set_event_cb(_obj, eventHandler);
+    if (parent)
+        parent->addChild(this);
+
+    auto eventCb = [this](const lv_event_t event) {
+        switch (event) {
+
+            case LV_EVENT_DRAG_BEGIN:
+            break;
+            case LV_EVENT_DRAG_END:
+                if (this->_onDragStoppedCb) {
+                    this->_onDragStoppedCb(this);
+                }
+            break;
+            case LV_EVENT_DEFOCUSED:
+                if (this->_onDefocused) {
+                    this->_onDefocused(this);
+                }
+            break;
+
+             case LV_EVENT_FOCUSED:
+                if (this->_onFocused) {
+                    this->_onFocused(this);
+                }
+            break;
+
+            default:
+                break;
+        }
+    };
+
+    setEventCallBack(eventCb);
 }
 
 LVGLBase::LVGLBase(lv_obj_t* const lvglObj, lv_obj_t* const parent)
@@ -169,6 +200,7 @@ void LVGLBase::setParent(LVGLBase* const parent){
     if (_parent) {
         lv_obj_set_parent(_obj, parent->_obj);
     }
+    parent->addChild(this);
 }
 
 void LVGLBase::setStyle(const uint8_t part, lv_style_t* const style) {
@@ -179,6 +211,33 @@ void LVGLBase::setStyle(const uint8_t part, LVGLStyle& style) {
     setStyle(part, style.style());
 }
 
+void LVGLBase::setDragEnabled(const bool value) {
+    lv_obj_set_drag(_obj, value);
+}
+
+void LVGLBase::setPosition(const lv_coord_t x, const lv_coord_t y) {
+    lv_obj_set_pos(_obj, x, y);
+}
+
+void LVGLBase::setDragDirection(const lv_drag_dir_t value) {
+    lv_obj_set_drag_dir(_obj, value);
+}
+
+void LVGLBase::setDragThrowEnabled(const bool value) {
+    lv_obj_set_drag_throw(_obj, value);
+}
+
+void LVGLBase::onDragStopped(eventCb_t cb) {
+    _onDragStoppedCb = cb;
+}
+
+void LVGLBase::onDefocused(eventCb_t cb) {
+    _onDefocused = cb;
+}
+
+void LVGLBase::onFocused(eventCb_t cb) {
+    _onFocused = cb;
+}
 
 void LVGLBase::resetStyle(const uint8_t part) {
     lv_obj_reset_style_list(_obj, part);
@@ -245,6 +304,16 @@ uint8_t LVGLBase::state() const {
 }
 
 LVGLBase::~LVGLBase() {
-    LVGL_DBG_PRINT("LVGLBase destructor");
+    LVGL_DBG_PRINT("LVGLBase destructor\r\n");
+
+    lv_obj_set_event_cb(_obj, NULL);
+
+    lv_obj_clean(_obj);
+    for(auto child : _children) {
+        LVGL_DBG_PRINT("deleting child...\r\n");
+        delete child;
+    }
+
+    // lv_obj_del_async(_obj);
     lv_obj_del(_obj);
 }

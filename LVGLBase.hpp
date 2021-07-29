@@ -4,6 +4,7 @@
 #include <functional>
 #include "LVGLStyle.hpp"
 #include "AbstractTheme.hpp"
+#include <vector>
 
 typedef std::function<void(const lv_event_t event)> eventCallback_t;
 enum class eLvglType {
@@ -25,11 +26,17 @@ enum class eLvglType {
 class LVGLBase {
     
     public:
+        typedef std::function<void(LVGLBase* obj)> eventCb_t;
         virtual ~LVGLBase();
         explicit LVGLBase(lv_obj_t* const lvglObj, LVGLBase* const parent);
         explicit LVGLBase(lv_obj_t* const lvglObj, lv_obj_t* const parent = lv_disp_get_scr_act(NULL));
         virtual eLvglType type() const = 0;
         static void setTheme(AbstractTheme* const theme);
+
+        // callbacks
+        void onDragStopped(eventCb_t cb);
+        void onDefocused(eventCb_t cb);
+        void onFocused(eventCb_t cb);
         
         void setAutoRealign(const bool value);
         void setState(const lv_state_t state);
@@ -38,7 +45,6 @@ class LVGLBase {
         void setStyle(const uint8_t part, lv_style_t* const style);
         void setStyle(const uint8_t part, LVGLStyle& style);
         void resetStyle(const uint8_t part);
-        // void setStyleTextFont(const lv_part_style_t part, const lv_state_t state, const lv_font_t* font);
         // style color
         virtual void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
@@ -46,6 +52,8 @@ class LVGLBase {
         void setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleLineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
+
+        void setPosition(const lv_coord_t x, const lv_coord_t y);
 
         // paddings
         void setPaddings(const lv_part_style_t part, const lv_state_t state, const int hor, const int ver);
@@ -57,6 +65,10 @@ class LVGLBase {
 
         void setStyleBorderWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
         void setStyleOutlineWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
+
+        void setDragEnabled(const bool value);
+        void setDragThrowEnabled(const bool value);
+        void setDragDirection(const lv_drag_dir_t value);
 
         void align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
         void hide();
@@ -84,10 +96,17 @@ class LVGLBase {
         }
     private:
         static void eventHandler(lv_obj_t * obj, lv_event_t event);
+        void addChild(LVGLBase* child) {
+            _children.emplace_back(child);
+        }
         static AbstractTheme* _theme;
     protected:
         void applyTheme();
         LVGLBase* _parent;
         lv_obj_t* _obj;
         eventCallback_t _eventCallback;
+        eventCb_t _onDragStoppedCb = nullptr;
+        eventCb_t _onDefocused = nullptr;
+        eventCb_t _onFocused = nullptr;
+        std::vector<LVGLBase*> _children;
 };
