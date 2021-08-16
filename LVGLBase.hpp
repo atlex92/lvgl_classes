@@ -27,24 +27,31 @@ class LVGLBase {
     
     public:
         typedef std::function<void(LVGLBase* obj)> eventCb_t;
+        // Creation and deletion
         virtual ~LVGLBase();
         explicit LVGLBase(lv_obj_t* const lvglObj, LVGLBase* const parent);
         explicit LVGLBase(lv_obj_t* const lvglObj, lv_obj_t* const parent = lv_disp_get_scr_act(NULL));
-        virtual eLvglType type() const = 0;
-        static void setTheme(AbstractTheme* const theme);
-
         // callbacks
         void onDragStopped(eventCb_t cb);
         void onDefocused(eventCb_t cb);
         void onFocused(eventCb_t cb);
-        
-        void setAutoRealign(const bool value);
-        void setState(const lv_state_t state);
-        uint8_t state() const;
         // style API
         void setStyle(const uint8_t part, lv_style_t* const style);
         void setStyle(const uint8_t part, LVGLStyle& style);
         void resetStyle(const uint8_t part);
+        // aligning
+        void align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
+        void alignHorizontally(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs);
+        void alignVertically(LVGLBase* const ref, const lv_align_t align, const lv_coord_t y_ofs);
+
+
+        virtual eLvglType type() const = 0;
+        static void setTheme(AbstractTheme* const theme);
+
+        
+        void setAutoRealign(const bool value);
+        void setState(const lv_state_t state);
+        uint8_t state() const;
         // style color
         virtual void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleBgColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
@@ -70,7 +77,6 @@ class LVGLBase {
         void setDragThrowEnabled(const bool value);
         void setDragDirection(const lv_drag_dir_t value);
 
-        void align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
         void hide();
         void show();
 
