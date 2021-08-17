@@ -3,6 +3,7 @@
 #include "LVGLLabel.hpp"
 #include <string>
 
+
 class LVGLButton : public LVGLBase{
     typedef std::function<void(LVGLButton*)> buttonCbType;
     public:
@@ -19,6 +20,7 @@ class LVGLButton : public LVGLBase{
         void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) override;
         void setSize(const size_t w, const size_t h) override;
         void setLabelText(const std::string& txt);
+        void setStyle(const uint8_t part, lv_style_t* const style) override;
     private:
         LVGLLabel* _lbl;
         buttonCbType _onClickedCb = nullptr;

@@ -1,5 +1,6 @@
 #include "LVGLButton.hpp"
 
+
 LVGLButton::LVGLButton(const std::string& txt, lv_obj_t* const parent)
     :   LVGLBase(lv_btn_create(parent, NULL), parent),
         _lbl{new LVGLLabel(txt, this)} {
@@ -85,6 +86,18 @@ void LVGLButton::onClicked(buttonCbType cb) {
 
 void LVGLButton::onLongPressed(buttonCbType cb) {
     _onLongPressedCb = cb;
+}
+
+void LVGLButton::setStyle(const uint8_t part, lv_style_t* const style) {
+
+    switch (part) {
+        case LV_BTN_LABEL_PART:
+            _lbl->setStyle(LV_LABEL_PART_MAIN, style);
+        break;
+        default:
+            LVGLBase::setStyle(part, style);
+        break;
+    }
 }
 
 void LVGLButton::onLongPressedRepeat(buttonCbType cb) {

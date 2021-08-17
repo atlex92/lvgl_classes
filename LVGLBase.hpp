@@ -6,6 +6,8 @@
 #include "AbstractTheme.hpp"
 #include <vector>
 
+#define LV_BTN_LABEL_PART   0xfe
+
 typedef std::function<void(const lv_event_t event)> eventCallback_t;
 enum class eLvglType {
     LVGL_CLASS_SWITCH,
@@ -37,18 +39,16 @@ class LVGLBase {
         void onDefocused(eventCb_t cb);
         void onFocused(eventCb_t cb);
         // style API
-        void setStyle(const uint8_t part, lv_style_t* const style);
-        void setStyle(const uint8_t part, LVGLStyle& style);
+        virtual void setStyle(const uint8_t part, lv_style_t* const style);
+        virtual void setStyle(const uint8_t part, LVGLStyle& style);
         void resetStyle(const uint8_t part);
         // aligning
         void align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
         void alignHorizontally(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs);
         void alignVertically(LVGLBase* const ref, const lv_align_t align, const lv_coord_t y_ofs);
-
-
+    
         virtual eLvglType type() const = 0;
         static void setTheme(AbstractTheme* const theme);
-
         
         void setAutoRealign(const bool value);
         void setState(const lv_state_t state);

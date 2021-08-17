@@ -88,6 +88,7 @@ void LVGLBase::applyTheme() {
                 setStyle(LV_BTN_PART_MAIN, _theme->commonBorderStyle());
                 setStyle(LV_BTN_PART_MAIN, _theme->commonOutlineStyle());
                 setStyle(LV_BTN_PART_MAIN, _theme->commonShapeStyle());
+                setStyle(LV_BTN_LABEL_PART, _theme->commonTextStyle());
             break;
 
             case eLvglType::LVGL_CLASS_PAGE:
