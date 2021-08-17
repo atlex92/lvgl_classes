@@ -167,6 +167,13 @@ void LVGLBase::applyTheme() {
                 setStyle(LV_SPINNER_PART_INDIC, _theme->indicatorStyle());
             break;
 
+            case eLvglType::LVGL_CLASS_TOASTER:
+                resetStyle(LV_LABEL_PART_MAIN);
+                resetStyle(LV_CONT_PART_MAIN);
+                setStyle(LV_LABEL_PART_MAIN, _theme->commonTextStyle());        
+                setStyle(LV_CONT_PART_MAIN, _theme->commonShapeStyle());          
+            break;
+
             default:
             break;
         }

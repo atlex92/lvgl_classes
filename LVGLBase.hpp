@@ -21,6 +21,7 @@ enum class eLvglType {
     LVGL_CLASS_BATTERY_IND,
     LVGL_CLASS_BATTERY_MAGE,
     LVGL_CLASS_SPINNER,
+    LVGL_CLASS_TOASTER,
     LVGL_CLASS_MAX   
 };
 class LVGLBase {

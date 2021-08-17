@@ -13,3 +13,4 @@
 #include "LVGLBatteryIndicator.hpp"
 #include "LVGLImage.hpp"
 #include "LVGLSpinner.hpp"
+#include "LVGLToaster.hpp"
