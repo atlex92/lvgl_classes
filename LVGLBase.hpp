@@ -60,7 +60,8 @@ class LVGLBase {
         void setStyleBorderColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
         void setStyleLineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color);
-
+        // style shape
+        void setStyleRadius(const lv_part_style_t part, const lv_state_t state, const int value);
         void setPosition(const lv_coord_t x, const lv_coord_t y);
 
         // paddings
@@ -69,7 +70,7 @@ class LVGLBase {
             const int bottom, const int left, const int right);
         void setInnerPadding(const lv_part_style_t part,const lv_state_t state, const int value);
         // fonts
-        void setFont(const lv_part_style_t part,const lv_state_t state, lv_font_t* const font);
+        virtual void setFont(const lv_part_style_t part,const lv_state_t state, lv_font_t* const font);
 
         void setStyleBorderWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);
         void setStyleOutlineWidth(const lv_part_style_t part, const lv_state_t state, const size_t width);

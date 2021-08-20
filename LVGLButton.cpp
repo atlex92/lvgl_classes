@@ -28,13 +28,16 @@ void LVGLButton::setLabelText(const std::string& txt) {
 
 void LVGLButton::setSize(const size_t w, const size_t h) {
     LVGLBase::setSize(w, h);
-    _lbl->setSize(width(), _lbl->height());
+}
+
+void LVGLButton::setFont(const lv_part_style_t part,const lv_state_t state, lv_font_t* const font) {
+    _lbl->setFont(part, state, font);
+    _lbl->setSize(width(), font->line_height);
 }
 
 void LVGLButton::init() {
     _lbl->setLabelLongMode(LV_LABEL_LONG_DOT);
     _lbl->setSize(width(), _lbl->height());
-    // _lbl->setPaddings(LV_CONT_PART_MAIN, LV_STATE_DEFAULT, 10, 0);
     auto eventCb = [this](const lv_event_t event) {
         switch (event) {
             case LV_EVENT_CLICKED:
@@ -73,7 +76,6 @@ void LVGLButton::init() {
 
     setEventCallBack(eventCb);
     _lbl->setAlignMode(LV_LABEL_ALIGN_CENTER);
-    _lbl->align(this, LV_ALIGN_CENTER, 0, 0);
 }
 
 void LVGLButton::setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {

@@ -157,7 +157,7 @@ void LVGLBase::applyTheme() {
 
             case eLvglType::LVGL_CLASS_LABEL:
                 resetStyle(LV_LABEL_PART_MAIN);
-                setStyle(LV_LABEL_PART_MAIN, _theme->commonTextStyle());          
+                setStyle(LV_LABEL_PART_MAIN, _theme->commonTextStyle());   
             break;
 
             case eLvglType::LVGL_CLASS_SPINNER:
@@ -301,6 +301,10 @@ void LVGLBase::setStyleOutlineWidth(const lv_part_style_t part, const lv_state_t
 
 void LVGLBase::setStyleOutlineColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {
     lv_obj_set_style_local_outline_color(_obj, part, state, color);
+}
+
+void LVGLBase::setStyleRadius(const lv_part_style_t part, const lv_state_t state, const int value) {
+    lv_obj_set_style_local_radius(_obj, part, state, value);
 }
 
 void LVGLBase::setState(const lv_state_t state) {
