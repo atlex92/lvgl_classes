@@ -30,7 +30,7 @@ void LVGLButton::setSize(const size_t w, const size_t h) {
     LVGLBase::setSize(w, h);
 }
 
-void LVGLButton::setFont(const lv_part_style_t part,const lv_state_t state, lv_font_t* const font) {
+void LVGLButton::setFont(const lv_part_style_t part, const lv_state_t state, lv_font_t* const font) {
     _lbl->setFont(part, state, font);
     _lbl->setSize(width(), font->line_height);
 }
