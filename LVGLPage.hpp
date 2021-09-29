@@ -11,4 +11,5 @@ class LVGLPage : public LVGLBase {
 
         void setScrollBarMode(const lv_scrollbar_mode_t mode);
         void setScrollPropogation(const bool val);
+        void setScrollableFit(const lv_fit_t fit);
 };

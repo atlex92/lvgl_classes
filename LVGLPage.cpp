@@ -34,3 +34,7 @@ void LVGLPage::setScrollBarMode(const lv_scrollbar_mode_t mode) {
 void LVGLPage::setScrollPropogation(const bool val) { 
     lv_page_set_scroll_propagation(_obj, val);
 }
+
+void LVGLPage::setScrollableFit(const lv_fit_t fit) {
+    lv_page_set_scrollable_fit(_obj, fit);
+}
