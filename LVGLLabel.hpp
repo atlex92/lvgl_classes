@@ -11,7 +11,10 @@ class LVGLLabel : public LVGLBase{
         explicit LVGLLabel(const std::string& txt, LVGLBase* const parent = NULL);
         explicit LVGLLabel(const std::string& txt, lv_obj_t* const parent);
         explicit LVGLLabel(lv_obj_t* const src, LVGLBase* const parent = NULL);
-
+        
+        void setRecolor(const bool value) {
+            lv_label_set_recolor(_obj, value);
+        }
         void setLabelLongMode(const lv_label_long_mode_t mode) {
             lv_label_set_long_mode(_obj, mode);
         }
