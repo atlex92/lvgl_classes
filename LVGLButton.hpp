@@ -16,6 +16,7 @@ class LVGLButton : public LVGLBase{
         void onClicked(buttonCbType cb);
         void onLongPressed(buttonCbType cb);
         void onLongPressedRepeat(buttonCbType cb);
+        void onReleased(buttonCbType cb);
         void init();
         void setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) override;
         void setSize(const size_t w, const size_t h) override;
@@ -27,4 +28,5 @@ class LVGLButton : public LVGLBase{
         buttonCbType _onClickedCb = nullptr;
         buttonCbType _onLongPressedCb = nullptr;
         buttonCbType _onLongPressedRepeatCb = nullptr;
+        buttonCbType _onReleasedCb = nullptr;
 };

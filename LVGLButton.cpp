@@ -45,6 +45,12 @@ void LVGLButton::init() {
                     this->_onClickedCb(this);
                 }
             break;
+
+            case LV_EVENT_RELEASED:
+                if (this->_onReleasedCb) {
+                    this->_onReleasedCb(this);
+                }
+            break;
             case LV_EVENT_LONG_PRESSED_REPEAT:
                 if (this->_onLongPressedRepeatCb) {
                     this->_onLongPressedRepeatCb(this);
@@ -88,6 +94,10 @@ void LVGLButton::onClicked(buttonCbType cb) {
 
 void LVGLButton::onLongPressed(buttonCbType cb) {
     _onLongPressedCb = cb;
+}
+
+void LVGLButton::onReleased(buttonCbType cb) {
+    _onReleasedCb = cb;
 }
 
 void LVGLButton::setStyle(const uint8_t part, lv_style_t* const style) {
