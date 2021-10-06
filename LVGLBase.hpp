@@ -46,6 +46,7 @@ class LVGLBase {
         void align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
         void alignHorizontally(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs);
         void alignVertically(LVGLBase* const ref, const lv_align_t align, const lv_coord_t y_ofs);
+
     
         virtual eLvglType type() const = 0;
         static void setTheme(AbstractTheme* const theme);
@@ -101,6 +102,25 @@ class LVGLBase {
 
         lv_obj_t* innerData() const {
             return _obj;
+        }
+
+        // coordinates
+        lv_area_t coordinates() const {
+            static lv_area_t ret {};
+            lv_obj_get_coords(_obj, &ret);
+            return ret;
+        }
+        lv_coord_t y() const {
+            return lv_obj_get_y(_obj);
+        }
+        lv_coord_t x() const {
+            return lv_obj_get_x(_obj);
+        }
+        void setX(const lv_coord_t value) {
+            lv_obj_set_x(_obj, value);
+        }
+        void setY(const lv_coord_t value) {
+            lv_obj_set_y(_obj, value);
         }
     private:
         static void eventHandler(lv_obj_t * obj, lv_event_t event);

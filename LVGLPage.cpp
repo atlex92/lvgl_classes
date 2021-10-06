@@ -38,3 +38,11 @@ void LVGLPage::setScrollPropogation(const bool val) {
 void LVGLPage::setScrollableFit(const lv_fit_t fit) {
     lv_page_set_scrollable_fit(_obj, fit);
 }
+
+void LVGLPage::setScrollableFit(const lv_fit_t fitHor, const lv_fit_t fitVer) {
+    lv_page_set_scrollable_fit2(_obj, fitHor, fitVer);
+}
+
+void LVGLPage::setScrollableFit(const lv_fit_t fitLeft, const lv_fit_t fitRight, const lv_fit_t fitTop, const lv_fit_t fitBottom) {
+    lv_page_set_scrollable_fit4(_obj, fitLeft, fitRight, fitTop, fitBottom);
+}

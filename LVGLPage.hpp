@@ -12,4 +12,12 @@ class LVGLPage : public LVGLBase {
         void setScrollBarMode(const lv_scrollbar_mode_t mode);
         void setScrollPropogation(const bool val);
         void setScrollableFit(const lv_fit_t fit);
+        void setScrollableFit(const lv_fit_t, const lv_fit_t);
+        void setScrollableFit(const lv_fit_t, const lv_fit_t, const lv_fit_t, const lv_fit_t);
+        void scrollVertically(const lv_coord_t value) {
+            lv_page_scroll_ver(_obj, value);
+        }
+        void scrollHoriazontally(const lv_coord_t value) {
+            lv_page_scroll_hor(_obj, value);
+        }
 };
