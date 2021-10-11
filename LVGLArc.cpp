@@ -46,7 +46,6 @@ void LVGLArc::init() {
         switch (event) {
             case LV_EVENT_RELEASED:
                 this->setValue(lv_arc_get_value(this->_obj));
-                LVGL_DBG_PRINT("LVGLArc : LV_EVENT_RELEASED");
             break;
             default:
                 break;

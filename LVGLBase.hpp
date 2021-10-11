@@ -1,6 +1,5 @@
 #pragma once
 #include "lvgl.h"
-#include "lvgl_debug.hpp"
 #include <functional>
 #include "LVGLStyle.hpp"
 #include "AbstractTheme.hpp"

@@ -13,7 +13,6 @@ static void changeOpacityCb(lv_obj_t* obj, uint16_t val) {
 void LVGLToaster::toastAppearedCallback(lv_anim_t* old_anim) {
 
     LVGLToaster* toaster = static_cast<LVGLToaster*>(old_anim->user_data);
-    LVGL_DBG_PRINT("toastAppearedCallback");
 
     lv_anim_set_ready_cb(old_anim, toastReadyCallback);
 
@@ -26,7 +25,6 @@ void LVGLToaster::toastAppearedCallback(lv_anim_t* old_anim) {
 
 void LVGLToaster::toastReadyCallback(lv_anim_t* old_anim) {
     LVGLToaster* toaster = static_cast<LVGLToaster*>(old_anim->user_data);
-    LVGL_DBG_PRINT("toastReadyCallback");
     lv_anim_set_ready_cb(old_anim, NULL);
 
     if (toaster->_tostReadymphr) {

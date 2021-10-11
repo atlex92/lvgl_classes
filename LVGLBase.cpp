@@ -14,14 +14,10 @@ void LVGLBase::eventHandler(lv_obj_t * obj, lv_event_t event) {
     LVGLBase* base = (LVGLBase*)lv_obj_get_user_data(obj);
 
     if (!base) {
-        LVGL_DBG_PRINT("Base object not found");
         return;
     }
     if(base->_eventCallback) {
         base->_eventCallback(event);
-    }
-    else {
-        // LVGL_DBG_PRINT("callback not found");
     }
 }
 
@@ -324,16 +320,10 @@ uint8_t LVGLBase::state() const {
 }
 
 LVGLBase::~LVGLBase() {
-    LVGL_DBG_PRINT("LVGLBase destructor\r\n");
-
     lv_obj_set_event_cb(_obj, NULL);
-
     lv_obj_clean(_obj);
     for(auto child : _children) {
-        LVGL_DBG_PRINT("deleting child...\r\n");
         delete child;
     }
-
-    // lv_obj_del_async(_obj);
     lv_obj_del(_obj);
 }

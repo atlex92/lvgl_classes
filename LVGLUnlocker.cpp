@@ -19,8 +19,6 @@ LVGLUnlocker::LVGLUnlocker(lv_obj_t* const parent)
 
 void LVGLUnlocker::init() {
 
-    LVGL_DBG_PRINT("LVGLUnlocker:init");
-
     lv_obj_set_adv_hittest(_obj, true);
 
     static lv_style_t defaultKnobStyle;
@@ -44,15 +42,10 @@ void LVGLUnlocker::init() {
             break;
 
             case LV_EVENT_RELEASED:
-                LVGL_DBG_PRINT("LV_EVENT_RELEASED");
                 if (lv_slider_get_value(this->_obj) == maxValue()) {
-                    LVGL_DBG_PRINT("UNLOCK_DETECTED");
                     if (_onUnlockCallback) {
                         _onUnlockCallback(this);
                     }
-                }
-                else {
-                    LVGL_DBG_PRINT("NO ULNLOCk");
                 }
                 lv_slider_set_value(_obj, minValue(), 100);
             break;

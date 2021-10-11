@@ -51,24 +51,28 @@ void LVGLButton::init() {
                     this->_onReleasedCb(this);
                 }
             break;
+
             case LV_EVENT_LONG_PRESSED_REPEAT:
                 if (this->_onLongPressedRepeatCb) {
                     this->_onLongPressedRepeatCb(this);
                 }
             break;
+
             case LV_EVENT_LONG_PRESSED:
                 if (this->_onLongPressedCb) {
                     this->_onLongPressedCb(this);
                 }
             break;
+
             case LV_EVENT_DRAG_BEGIN:
-                LVGL_DBG_PRINT("LV_EVENT_DRAG_BEGIN!");
             break;
+
             case LV_EVENT_DRAG_END:
                 if (this->_onDragStoppedCb) {
                     this->_onDragStoppedCb(this);
                 }
             break;
+
             case LV_EVENT_DEFOCUSED:
                 if (this->_onDefocused) {
                     this->_onDefocused(this);
@@ -76,7 +80,7 @@ void LVGLButton::init() {
             break;
 
             default:
-                break;
+            break;
         }
     };
 
