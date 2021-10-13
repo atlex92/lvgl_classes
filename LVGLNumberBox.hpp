@@ -19,6 +19,17 @@ class LVGLNumberBox : public AbstractRangeValueContainer<int>, public LVGLRow {
             _leftBtn->setFont(LV_LABEL_PART_MAIN, state, font);
             _rightBtn->setFont(LV_LABEL_PART_MAIN, state, font);
         }
+
+        void setLabelFont(const lv_state_t state, lv_font_t* const font) {
+            _valueLbl->setFont(LV_LABEL_PART_MAIN, state, font);
+            _valueLbl->setFont(LV_LABEL_PART_MAIN, state, font);
+        }
+
+        void setLabelText(const std::string& label) {
+            _label = label;
+            redrawText();
+        }
+
     private:
         void redrawText();
         void init();
