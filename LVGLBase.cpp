@@ -259,12 +259,24 @@ void LVGLBase::align(LVGLBase* const ref, const lv_align_t align, const lv_coord
     lv_obj_align(_obj, (ref and ref->innerData()) ? ref->innerData() : NULL, align, x_ofs, y_ofs);
 }
 
+void LVGLBase::align(lv_obj_t* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs) {
+    lv_obj_align(_obj, ref ? ref : NULL, align, x_ofs, y_ofs);
+}
+
 void LVGLBase::alignHorizontally(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs) {
     lv_obj_align_x(_obj, (ref and ref->innerData()) ? ref->innerData() : NULL, align, x_ofs);
 }
 
+void LVGLBase::alignHorizontally(lv_obj_t* const ref, const lv_align_t align, const lv_coord_t x_ofs) {
+    lv_obj_align_x(_obj, ref? ref : NULL, align, x_ofs);
+}
+
 void LVGLBase::alignVertically(LVGLBase* const ref, const lv_align_t align, const lv_coord_t y_ofs) {
     lv_obj_align_y(_obj, (ref and ref->innerData()) ? ref->innerData() : NULL, align, y_ofs);
+}
+
+void LVGLBase::alignVertically(lv_obj_t* const ref, const lv_align_t align, const lv_coord_t y_ofs) {
+    lv_obj_align_y(_obj, ref ? ref : NULL, align, y_ofs);
 }
 
 void LVGLBase::setStyleTextColor(const lv_part_style_t part, const lv_state_t state, const lv_color_t color) {

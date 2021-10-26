@@ -23,6 +23,7 @@ class LVGLButton : public LVGLBase{
         void setLabelText(const std::string& txt);
         void setStyle(const uint8_t part, lv_style_t* const style) override;
         void setFont(const lv_part_style_t part, const lv_state_t state, lv_font_t* const font) override;
+        std::string labelText() const;
     private:
         LVGLLabel* _lbl;
         buttonCbType _onClickedCb = nullptr;

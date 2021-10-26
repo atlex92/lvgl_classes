@@ -43,10 +43,14 @@ class LVGLBase {
         void resetStyle(const uint8_t part);
         // aligning
         void align(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
+        void align(lv_obj_t* const ref, const lv_align_t align, const lv_coord_t x_ofs, const lv_coord_t y_ofs);
         void alignHorizontally(LVGLBase* const ref, const lv_align_t align, const lv_coord_t x_ofs);
+        void alignHorizontally(lv_obj_t* const ref, const lv_align_t align, const lv_coord_t x_ofs);
         void alignVertically(LVGLBase* const ref, const lv_align_t align, const lv_coord_t y_ofs);
+        void alignVertically(lv_obj_t* const ref, const lv_align_t align, const lv_coord_t y_ofs);
 
-    
+
+            
         virtual eLvglType type() const = 0;
         static void setTheme(AbstractTheme* const theme);
         
@@ -84,14 +88,17 @@ class LVGLBase {
 
         // size API
         virtual void setSize(const size_t w, const size_t h);
-        size_t width() const {
+        lv_coord_t width() const {
             return lv_obj_get_width(_obj);
         }
-        size_t height() const{ 
+        lv_coord_t height() const{ 
             return lv_obj_get_height(_obj);
         }
 
         void setParent(LVGLBase* const parent);
+        LVGLBase* parent() const {
+            return _parent;
+        }
         void setClickable(const bool value);
 
         //style

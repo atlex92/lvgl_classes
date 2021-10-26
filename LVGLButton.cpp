@@ -129,3 +129,7 @@ void LVGLButton::enable() {
     setState(LV_BTN_STATE_RELEASED);
     _lbl->setState(LV_STATE_DEFAULT);
 }
+
+std::string LVGLButton::labelText() const {
+    return _lbl->text();
+}
