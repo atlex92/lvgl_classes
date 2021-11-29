@@ -1,16 +1,15 @@
 #include "LVGLUnlocker.hpp"
 
-
-
-LVGLUnlocker::LVGLUnlocker(LVGLBase* const parent) 
-    :   LVGLSlider(0, 100, 1, parent) {
+LVGLUnlocker::LVGLUnlocker(const uint8_t unlockThreshold, LVGLBase* const parent) 
+    :   LVGLSlider(0, 100, 1, parent),
+        _unlockPercentThreshold{unlockThreshold} {
 
     init();
-    // applyTheme();
 }
 
-LVGLUnlocker::LVGLUnlocker(lv_obj_t* const parent)
-    :   LVGLSlider(0, 100, 1, parent) {
+LVGLUnlocker::LVGLUnlocker(const uint8_t unlockThreshold, lv_obj_t* const parent)
+    :   LVGLSlider(0, 100, 1, parent), 
+        _unlockPercentThreshold{unlockThreshold} {
 
     init();
     applyTheme();
@@ -42,7 +41,7 @@ void LVGLUnlocker::init() {
             break;
 
             case LV_EVENT_RELEASED:
-                if (lv_slider_get_value(this->_obj) == maxValue()) {
+                if (lv_slider_get_value(this->_obj) >= (_unlockPercentThreshold/100.0 * maxValue())) {
                     if (_onUnlockCallback) {
                         _onUnlockCallback(this);
                     }
